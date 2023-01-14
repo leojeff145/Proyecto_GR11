@@ -4,10 +4,10 @@ template<typename T>
 class Nodo
 {
 public:
-	Nodo(T dato);
-	Nodo(T dato, Nodo<T> *siguiente);
-	Nodo(T dato, Nodo<T> *siguiente, Nodo<T> *anterior);
-	
+    Nodo(T dato);
+    Nodo(T dato, Nodo<T>* siguiente);
+    Nodo(T dato, Nodo<T>* siguiente, Nodo<T>* anterior);
+
     void set_siguiente(Nodo<T>* siguiente);
     Nodo<T>* get_siguiente();
 
@@ -21,4 +21,4 @@ private:
     T dato;
     Nodo<T>* siguiente = nullptr;
     Nodo<T>* anterior = nullptr;
-}
+};
