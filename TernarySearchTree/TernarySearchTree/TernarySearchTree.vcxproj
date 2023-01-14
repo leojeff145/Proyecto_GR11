@@ -131,10 +131,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodoBasico.cpp" />
     <ClCompile Include="NodoTernario.cpp" />
+    <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArbolBT.h" />
     <ClInclude Include="Fecha.h" />
+<<<<<<< HEAD
     <ClInclude Include="NodoAB.h" />
+=======
+    <ClInclude Include="Modelo.h" />
+    <ClInclude Include="Usuario.h" />
+    <ClInclude Include="Validaciones.h" />
+>>>>>>> 8f8bcdda78fe256234afe806c551605db0f141b7
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="NodoBasico.h" />
     <ClInclude Include="NodoTernario.h" />
