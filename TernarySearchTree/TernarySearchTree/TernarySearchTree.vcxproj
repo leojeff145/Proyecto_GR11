@@ -134,6 +134,7 @@
     <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArbolBT.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Modelo.h" />
     <ClInclude Include="Usuario.h" />
