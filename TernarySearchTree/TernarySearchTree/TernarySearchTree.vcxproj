@@ -131,9 +131,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodoBasico.cpp" />
     <ClCompile Include="NodoTernario.cpp" />
+    <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fecha.h" />
+    <ClInclude Include="Usuario.h" />
     <ClInclude Include="Validaciones.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="NodoBasico.h" />
