@@ -5,8 +5,16 @@ class Nodo
 {
 public:
     Nodo(T dato);
+<<<<<<< HEAD
     Nodo(T dato, Nodo<T> *siguiente);
     Nodo(T dato, Nodo<T> *siguiente, Nodo<T> *anterior);
+=======
+    Nodo(T dato, Nodo<T>* siguiente);
+    Nodo(T dato, Nodo<T>* siguiente, Nodo<T>* anterior);
+
+    void set_siguiente(Nodo<T>* siguiente);
+    Nodo<T>* get_siguiente();
+>>>>>>> 33ff88e141b50845d830051e53773676c577ebdc
 
     void set_siguiente(Nodo<T> *siguiente);
     Nodo<T> *get_siguiente();
@@ -19,6 +27,7 @@ public:
 
 private:
     T dato;
+<<<<<<< HEAD
     Nodo<T> *siguiente = nullptr;
     Nodo<T> *anterior = nullptr;
 };
@@ -74,3 +83,8 @@ template<typename T>
 Nodo<T>* Nodo<T>::get_anterior() {
     return anterior;
 }
+=======
+    Nodo<T>* siguiente = nullptr;
+    Nodo<T>* anterior = nullptr;
+};
+>>>>>>> 33ff88e141b50845d830051e53773676c577ebdc

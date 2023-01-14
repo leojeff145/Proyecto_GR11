@@ -128,11 +128,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="NodoBasico.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="NodoBasico.h" />
+=======
+    <ClCompile Include="NodoTernario.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Nodo.h" />
+    <ClInclude Include="NodoTernario.h" />
+>>>>>>> 33ff88e141b50845d830051e53773676c577ebdc
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
