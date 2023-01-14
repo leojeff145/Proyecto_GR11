@@ -73,4 +73,4 @@ void Nodo<T>::set_anterior(Nodo<T> *anterior) {
 template<typename T>
 Nodo<T>* Nodo<T>::get_anterior() {
     return anterior;
-};
+}
