@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodoBasico.cpp" />
     <ClCompile Include="NodoTernario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fecha.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="NodoBasico.h" />
     <ClInclude Include="NodoTernario.h" />
