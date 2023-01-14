@@ -84,8 +84,8 @@ public:
         return answer;
     }
 
-    inline static std::string leer_password(std::string label) {
-        std::string password;
+    inline static std::string leer_contrasenia(std::string label) {
+        std::string contrasenia;
         int ch = 0;
 
         std::cout << label;
@@ -102,23 +102,23 @@ public:
             }
 
             if (ch == 8) {
-                if (password.length() != 0) {
+                if (contrasenia.length() != 0) {
                     std::cout << "\b \b";
-                    password.resize(password.length() - 1);
+                    contrasenia.resize(contrasenia.length() - 1);
                 }
                 else {
                     Beep(523, 100);
                 }
             }
             else {
-                password += ch;
+                contrasenia += ch;
                 std::cout << '*';
             }
         }
 
         std::cout << std::endl;
 
-        return password;
+        return contrasenia;
     }
 
     static inline int convertirEnEntero(std::string cadena)
