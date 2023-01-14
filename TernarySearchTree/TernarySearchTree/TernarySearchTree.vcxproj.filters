@@ -15,18 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\..\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="NodoBasico.cpp">
+    <ClCompile Include="..\..\NodoBasico.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodoTernario.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Nodo.h">
+    <ClInclude Include="..\..\Nodo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="NodoBasico.h">
+    <ClInclude Include="..\..\NodoBasico.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodoTernario.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,10 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\NodoBasico.cpp" />
+    <ClCompile Include="..\..\NodoTernario.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Nodo.h" />
+    <ClInclude Include="..\..\NodoBasico.h" />
+    <ClInclude Include="..\..\NodoTernario.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7f5613da-ecbc-4e3d-b95c-a94247eb50ac}</ProjectGuid>
+    <ProjectGuid>{7a133a0b-3709-496a-886e-74c36569cce9}</ProjectGuid>
     <RootNamespace>TernarySearchTree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -126,22 +136,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="NodoBasico.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Nodo.h" />
-    <ClInclude Include="NodoBasico.h" />
-=======
-    <ClCompile Include="NodoTernario.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Nodo.h" />
-    <ClInclude Include="NodoTernario.h" />
->>>>>>> 33ff88e141b50845d830051e53773676c577ebdc
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
