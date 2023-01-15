@@ -54,7 +54,7 @@ public:
      * @param argument
     */
     template <typename T>
-    void add(std::string llave, MenuOpcionesArgumento<T>* argumento);
+    void add(std::string llave, MenuOpcionesArgumento<T> *argumento);
 
     /**
      * @brief Agrega un argumento con clave y un valor
@@ -85,7 +85,7 @@ public:
 
     bool has(std::string llave);
 private:
-    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>>* argumento;
+    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>> *argumento;
 };
 
 inline MenuOpcionesArgumentos::MenuOpcionesArgumentos() {
@@ -93,7 +93,7 @@ inline MenuOpcionesArgumentos::MenuOpcionesArgumentos() {
 }
 
 template <typename T>
-void MenuOpcionesArgumentos::add(std::string llave, MenuOpcionesArgumento<T>* argumento) {
+void MenuOpcionesArgumentos::add(std::string llave, MenuOpcionesArgumento<T> *argumento) {
     (*argumento)[llave] = std::unique_ptr<MenuOpcionesArgumentoBase>(argumento);
 }
 
@@ -170,7 +170,7 @@ private:
     std::optional<MenuOpcionesCallback2> regresar2;
     bool esperar_despues_ejecucion = true;
     MenuOpcionesArgumentos argumento;
-    std::function<bool()> regrso_visible_ = []() { return true; };
+    std::function<bool()> regreso_visible_ = []() { return true; };
 };
 
 
