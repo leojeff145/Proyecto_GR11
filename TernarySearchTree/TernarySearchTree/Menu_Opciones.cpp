@@ -1,28 +1,28 @@
 #include "Menu_Opciones.h"
 
-MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback callback) {
+MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback regresar) {
     this->label = label;
-    this->callback = callback;
+    this->regresar = regresar;
 }
 
 
-MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback callback, bool wait_after_exec) {
+MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback regresar, bool esperar_despues_ejecucion) {
     this->label = label;
-    this->callback = callback;
-    this->wait_after_exec = wait_after_exec;
+    this->regresar = regresar;
+    this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 
-MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback callback, MenuOpcionesArgumentos argumento) {
+MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento) {
     this->label = label;
-    this->callback = callback;
+    this->regresar = regresar;
     this->argumento = argumento;
 }
 
-MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback callback, MenuOpcionesArgumentos argumento, bool wait_after_exec) {
+MenuOpciones::MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion) {
     this->label = label;
-    this->callback = callback;
+    this->regresar = regresar;
     this->argumento = argumento;
-    this->wait_after_exec = wait_after_exec;
+    this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 
 

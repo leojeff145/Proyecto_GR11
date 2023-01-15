@@ -127,15 +127,15 @@ typedef std::function<void()> MenuOpcionesCallback2;
 
 class MenuOpciones {
 public:
-    MenuOpciones(std::string label, MenuOpcionesCallback callback);
-    MenuOpciones(std::string label, MenuOpcionesCallback callback, bool wait_after_exec);
-    MenuOpciones(std::string label, MenuOpcionesCallback callback, MenuOpcionesArgumentos argumento);
-    MenuOpciones(std::string label, MenuOpcionesCallback callback, MenuOpcionesArgumentos argumento, bool wait_after_exec);
+    MenuOpciones(std::string label, MenuOpcionesCallback regresar);
+    MenuOpciones(std::string label, MenuOpcionesCallback regresar, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento);
+    MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
 
-    MenuOpciones(std::string label, MenuOpcionesCallback2 callback);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 callback, bool wait_after_exec);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 callback, MenuOpcionesArgumentos argumento);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 callback, MenuOpcionesArgumentos argumento, bool wait_after_exec);
+    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar);
+    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento);
+    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
 
     bool visible();
     void visible(bool visible);
@@ -166,11 +166,11 @@ public:
 
 private:
     std::string label;
-    std::optional<MenuOpcionesCallback> callback;
-    std::optional<MenuOpcionesCallback2> callback2;
-    bool wait_after_exec = true;
+    std::optional<MenuOpcionesCallback> regresar;
+    std::optional<MenuOpcionesCallback2> regresar2;
+    bool esperar_despues_ejecucion = true;
     MenuOpcionesArgumentos argumento;
-    std::function<bool()> visible_callback_ = []() { return true; };
+    std::function<bool()> regrso_visible_ = []() { return true; };
 };
 
 
