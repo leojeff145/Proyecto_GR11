@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu_opciones.cpp" />
     <ClCompile Include="NodoBasico.cpp" />
     <ClCompile Include="NodoTernario.cpp" />
     <ClCompile Include="Usuario.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="ArbolBT.h" />
     <ClInclude Include="Ayudas.h" />
     <ClInclude Include="Fecha.h" />
+    <ClInclude Include="Menu_opciones.h" />
     <ClInclude Include="Modelo.h" />
     <ClInclude Include="NodoAB.h" />
     <ClInclude Include="Usuario.h" />
