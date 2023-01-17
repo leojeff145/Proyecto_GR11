@@ -1,2 +1,0 @@
-#pragma once
-#define TEXTO_MARQUESINA "|| ARBOLES DE BUSQUEDA TERNARIA  ||"
