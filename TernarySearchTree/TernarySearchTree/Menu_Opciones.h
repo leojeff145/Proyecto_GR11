@@ -21,24 +21,24 @@ template <typename T>
 class MenuOpcionesArgumento : public MenuOpcionesArgumentoBase {
 public:
     typedef T Type;
-    explicit MenuOpcionesArgumento(const Type& valor);
-    Type get_valor();
-    void set_valor(Type valor);
+    explicit MenuOpcionesArgumento(const Type& value);
+    Type get_value();
+    void set_value(Type value);
 private:
-    Type valor;
+    Type value;
 };
 
 template <typename T>
-MenuOpcionesArgumento<T>::MenuOpcionesArgumento(const T& valor) : valor(valor) {}
+MenuOpcionesArgumento<T>::MenuOpcionesArgumento(const T& value) : value(value) {}
 
 template <typename T>
-T MenuOpcionesArgumento<T>::get_valor() {
-    return valor;
+T MenuOpcionesArgumento<T>::get_value() {
+    return value;
 }
 
 template <typename T>
-void MenuOpcionesArgumento<T>::set_valor(T valor) {
-    this->valor = valor;
+void MenuOpcionesArgumento<T>::set_value(T value) {
+    this->value = value;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,42 +50,42 @@ public:
     /**
      * @brief agrega un argumento con clave
      * @tparam T tipo del argumento
-     * @param llave
+     * @param key
      * @param argument
     */
     template <typename T>
-    void add(std::string llave, MenuOpcionesArgumento<T> *argumento);
+    void add(std::string key, MenuOpcionesArgumento<T>* argumento);
 
     /**
      * @brief Agrega un argumento con clave y un valor
      * @tparam T tipo de dato del argumento
-     * @param llave clave del argumento
-     * @param valor
+     * @param key clave del argumento
+     * @param value
     */
     template <typename T>
-    void add(std::string llave, T valor);
+    void add(std::string key, T value);
 
     /**
      * @brief obtiene un argumento por clave
      * @tparam T tipo de dato del argumento
-     * @param llave clave del argumento a obtener
+     * @param key clave del argumento a obtener
      * @return
     */
     template <typename T>
-    T get(std::string llave);
+    T get(std::string key);
 
     /**
      * @brief define un argumento por clave y valor
      * @tparam T tipo de dato del argumento
-     * @param llave clave del argumento
-     * @param valor valor del argumento
+     * @param key clave del argumento
+     * @param value valor del argumento
     */
     template <typename T>
-    void set(std::string llave, T valor);
+    void set(std::string key, T value);
 
-    bool has(std::string llave);
+    bool has(std::string key);
 private:
-    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>> *argumento;
+    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>>* argumento;
 };
 
 inline MenuOpcionesArgumentos::MenuOpcionesArgumentos() {
@@ -93,29 +93,29 @@ inline MenuOpcionesArgumentos::MenuOpcionesArgumentos() {
 }
 
 template <typename T>
-void MenuOpcionesArgumentos::add(std::string llave, MenuOpcionesArgumento<T> *argumento) {
-    (*argumento)[llave] = std::unique_ptr<MenuOpcionesArgumentoBase>(argumento);
+void MenuOpcionesArgumentos::add(std::string key, MenuOpcionesArgumento<T>* argumento) {
+    (*argumento)[key] = std::unique_ptr<MenuOpcionesArgumentoBase>(argumento);
 }
 
 template <typename T>
-void MenuOpcionesArgumentos::add(std::string llave, T valor) {
-    add(llave, new MenuOpcionesArgumento<T>(valor));
+void MenuOpcionesArgumentos::add(std::string key, T value) {
+    add(key, new MenuOpcionesArgumento<T>(value));
 }
 
 template <typename T>
-T MenuOpcionesArgumentos::get(std::string llave) {
-    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[llave]));
-    return arg.get_valor();
+T MenuOpcionesArgumentos::get(std::string key) {
+    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[key]));
+    return arg.get_value();
 }
 
 template <typename T>
-void MenuOpcionesArgumentos::set(std::string llave, T valor) {
-    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[llave]));
-    arg.set_valor(valor);
+void MenuOpcionesArgumentos::set(std::string key, T value) {
+    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[key]));
+    arg.set_value(value);
 }
 
-inline bool MenuOpcionesArgumentos::has(std::string llave) {
-    return !(argumento->find(llave) == argumento->end());
+inline bool MenuOpcionesArgumentos::has(std::string key) {
+    return !(argumento->find(key) == argumento->end());
 }
 
 #endif
@@ -170,7 +170,7 @@ private:
     std::optional<MenuOpcionesCallback2> regresar2;
     bool esperar_despues_ejecucion = true;
     MenuOpcionesArgumentos argumento;
-    std::function<bool()> regreso_visible_ = []() { return true; };
+    std::function<bool()> regrso_visible_ = []() { return true; };
 };
 
 
