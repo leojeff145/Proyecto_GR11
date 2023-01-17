@@ -56,5 +56,25 @@ inline void ArbolBT::escribir(std::ostream& out) {
 	escribir_recursivo(raiz_, out);
 }
 
+inline NodoTernario* ArbolBT::leer(std::string nombre_archivo) {
+	NodoTernario* raiz;
+	std::ifstream archivo(nombre_archivo.c_str());
+	leer_recursivo(raiz, archivo);
+	raiz_ = raiz;
+	return raiz;
+}
 
+inline void ArbolBT::escribir_recursivo(NodoTernario* raiz, std::ostream& out) {
+	if (raiz == nullptr) {
+		out << "Vacio" << std::endl;
+		return;
+	}
+	
+	out << raiz->valor() << std::endl;
+	escribir_recursivo(raiz->izquierda(), out);
+	escribir_recursivo(raiz->medio(), out);
+	escribir_recursivo(raiz->derecha(), out);
+}
+
+inline int ArbolBT
 
