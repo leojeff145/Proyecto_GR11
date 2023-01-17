@@ -271,3 +271,40 @@ inline void ArbolBT::limpieza_eliminacion(NodoTernario* arbol) {
 inline void ArbolBT::remover(std::string valor) {
 	remover_recursivo(raiz_, valor, 0);
 }
+
+inline NodoTernario* ArbolBT::remover_recursivo(NodoTernario* nodo, std::string palabra, int posicion) {
+	if (nodo == nullptr) {
+		return nullptr;
+	}
+
+	int child = this->contar_hermanos(nodo);
+
+	if (palabra[posicion] < nodo->valor()) {
+		nodo->izquierda(this->remover_recursivo(nodo->izquierda(), palabra, posicion));
+	}
+	else if (palabra[posicion] > nodo->valor()) {
+		nodo->right(this->remover_recursivo(nodo->derecha(), palabra, posicion));
+	}
+	else {
+		if ((posicion + 1) < palabra.length()) {
+			// When word not empty
+			nodo->medio(this->remover_recursivo(nodo->medio(), palabra, posicion + 1));
+		}
+		else if (nodo->es_Palabra() == true) {
+			if (child > 0) {
+				// In case child node exist of deleted word
+				nodo->es_Palabra(false);
+			}
+			else {
+				delete nodo;
+				return nullptr;
+			}
+		}
+	}
+	if (child != this->contar_hermanos(nodo) && child == 1 && nodo->es_Palabra() == false) {
+		delete nodo;
+		return nullptr;
+	}
+
+	return nodo;
+}
