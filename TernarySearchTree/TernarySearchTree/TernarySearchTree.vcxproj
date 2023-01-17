@@ -131,7 +131,6 @@
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md5.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu_Opciones.cpp" />
     <ClCompile Include="NodoBasico.cpp" />
     <ClCompile Include="NodoTernario.cpp" />
@@ -140,9 +139,9 @@
   <ItemGroup>
     <ClInclude Include="ArbolBT.h" />
     <ClInclude Include="Ayudas.h" />
+    <ClInclude Include="CDLlist.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="md5.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Menu_Opciones.h" />
     <ClInclude Include="Modelo.h" />
     <ClInclude Include="NodoAB.h" />
