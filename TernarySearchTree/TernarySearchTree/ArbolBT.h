@@ -1,8 +1,8 @@
 #pragma once
 #include "NodoTernario.h"
+#include "NodoBasico.h"
 #include "ayudas.h"
 #include "NodoAB.h"
-#include "NodoBasico.h"
 #include <regex>
 #include <string>
 #include <iostream>
@@ -283,7 +283,7 @@ inline NodoTernario* ArbolBT::remover_recursivo(NodoTernario* nodo, std::string 
 		nodo->izquierda(this->remover_recursivo(nodo->izquierda(), palabra, posicion));
 	}
 	else if (palabra[posicion] > nodo->valor()) {
-		nodo->right(this->remover_recursivo(nodo->derecha(), palabra, posicion));
+		nodo->derecha(this->remover_recursivo(nodo->derecha(), palabra, posicion));
 	}
 	else {
 		if ((posicion + 1) < palabra.length()) {

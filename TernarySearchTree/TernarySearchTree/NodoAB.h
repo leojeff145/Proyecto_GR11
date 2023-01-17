@@ -159,7 +159,7 @@ void NodoAB<T>::calcProfundidad(std::size_t inicioProfundidad) {
 		hijo->calcProfundidad(inicioProfundidad + 1);
 	}
 }
-der
+
 template <class T>
 std::size_t NodoAB<T>::calcAncho() {
 	if (_hijos.empty()) {
