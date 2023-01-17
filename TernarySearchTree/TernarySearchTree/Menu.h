@@ -20,10 +20,10 @@ public:
     static Consola& get();
 
     void print(std::string text, COORD coord);
-    void clear_line(short y);
-    void clear_screen();
-    void clear_area(SMALL_RECT area);
-    void set_cursor_position(COORD coord);
+    void limpiar_linea(short y);
+    void limpiar_pantalla();
+    void limpiar_area(SMALL_RECT area);
+    void set_cursor_posicion(COORD coord);
     COORD get_consola_size();
 
 private:

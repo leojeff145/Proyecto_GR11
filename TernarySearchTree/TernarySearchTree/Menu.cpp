@@ -42,14 +42,14 @@ void Menu::display() {
 
     Consola& consola = Consola::get();
 
-    consola.clear_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
-    consola.set_cursor_position({ 0, 2 });
+    consola.limpiar_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
+    consola.set_cursor_posicion({ 0, 2 });
 
     while (running) {
         int posicion = 1;
 
-        consola.clear_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
-        consola.set_cursor_position({ 0, 2 });
+        consola.limpiar_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
+        consola.set_cursor_posicion({ 0, 2 });
 
         std::vector<MenuOpciones> visible_opciones;
 
@@ -150,7 +150,7 @@ void Consola::print(std::string text, COORD coord) {
         return;
     }
 
-    COORD console_size = get_consola_size();
+    COORD consola_size = get_consola_size();
     SMALL_RECT posicion = {
         coord.X, // left
         coord.Y, // top
@@ -172,26 +172,26 @@ void Consola::print(std::string text, COORD coord) {
     free(buffer);
 }
 
-void Consola::clear_line(short y) {
-    COORD console_size = get_consola_size();
+void Consola::limpiar_linea(short y) {
+    COORD consola_size = get_consola_size();
 
-    if (y < 0 || y > console_size.Y) return;
+    if (y < 0 || y > consola_size.Y) return;
 
-    std::string empty(console_size.X, ' ');
+    std::string empty(consola_size.X, ' ');
     print(empty, { 0, y });
 }
 
-void Consola::clear_screen() {
+void Consola::limpiar_pantalla() {
     COORD consola_size = get_consola_size();
-    clear_area({ 0, 0, consola_size.X, consola_size.Y });
+    limpiar_area({ 0, 0, consola_size.X, consola_size.Y });
 }
 
-void Consola::set_cursor_position(COORD coord) {
-    HANDLE console_handler = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(console_handler, coord);
+void Consola::set_cursor_posicion(COORD coord) {
+    HANDLE consola_handler = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(consola_handler, coord);
 }
 
-void Consola::clear_area(SMALL_RECT area) {
+void Consola::limpiar_area(SMALL_RECT area) {
     int x = area.Left;
     int y = area.Top;
     int width = area.Right - area.Left;
@@ -211,7 +211,7 @@ void Consola::clear_area(SMALL_RECT area) {
         y + height // bottom
     };
     COORD buffer_size = { width, height };
-    HANDLE console_handler = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE consola_handler = GetStdHandle(STD_OUTPUT_HANDLE);
     int i = 0;
 
     for (const char c : spaces) {
@@ -220,19 +220,19 @@ void Consola::clear_area(SMALL_RECT area) {
         i++;
     }
 
-    WriteConsoleOutputA(console_handler, buffer, buffer_size, { 0, 0 }, &posicion);
+    WriteConsoleOutputA(consola_handler, buffer, buffer_size, { 0, 0 }, &posicion);
     free(buffer);
 }
 
 COORD Consola::get_consola_size() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
-    int columns, rows;
+    int columnas, filas;
 
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-    columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-    rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    columnas = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    filas = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 
-    COORD size = { columns, rows };
+    COORD size = { columnas, filas };
 
     return size;
 }
