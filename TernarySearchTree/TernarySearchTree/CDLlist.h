@@ -9,7 +9,7 @@ template<typename T>
 class CDLlist {
 public:
 	CDLlist() = default;
-
+	
 	Nodo<T>* nAct(int actual);
 	void retroceder(const T& valor);
 	void adelantar(const T& valor);

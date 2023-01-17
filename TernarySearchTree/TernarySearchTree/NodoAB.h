@@ -66,8 +66,8 @@ private:
 
 	void imprimirEspacio();
 	void imprimirSubrayar();
-	void imprimirHijosDer();
 	void imprimirHijosIzq();
+	void imprimirHijosDer();
 	void imprimirHijosVertical();
 
 };
@@ -159,7 +159,7 @@ void NodoAB<T>::calcProfundidad(std::size_t inicioProfundidad) {
 		hijo->calcProfundidad(inicioProfundidad + 1);
 	}
 }
-
+der
 template <class T>
 std::size_t NodoAB<T>::calcAncho() {
 	if (_hijos.empty()) {
@@ -250,13 +250,13 @@ void NodoAB<T>::imprimirPrelinea(std::size_t ln, std::vector<std::unique_ptr<std
 		if (CisCentroHijo(c, niveles[ln])) {
 			switch (posicionPadreDeHijo(c, niveles[ln - 1], niveles[ln])) {
 			case -1:
-				imprimirHijosDer();
+				imprimirHijosIzq();
 				break;
 			case 0:
 				imprimirHijosVertical();
 				break;
 			case 1:
-				imprimirHijosIzq();
+				imprimirHijosDer();
 				break;
 			}
 		}
@@ -349,12 +349,12 @@ void NodoAB<T>::imprimirSubrayar() {
 }
 
 template <class T>
-void NodoAB<T>::imprimirHijosDer() {
+void NodoAB<T>::imprimirHijosIzq() {
 	std::cout << "/";
 }
 
 template <class T>
-void NodoAB<T>::imprimirHijosIzq() {
+void NodoAB<T>::imprimirHijosDer() {
 	std::cout << "\\";
 }
 
