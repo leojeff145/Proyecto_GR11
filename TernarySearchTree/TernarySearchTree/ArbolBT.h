@@ -287,12 +287,12 @@ inline NodoTernario* ArbolBT::remover_recursivo(NodoTernario* nodo, std::string 
 	}
 	else {
 		if ((posicion + 1) < palabra.length()) {
-			// When word not empty
+			// Cuando la palabra no está vacía
 			nodo->medio(this->remover_recursivo(nodo->medio(), palabra, posicion + 1));
 		}
 		else if (nodo->es_Palabra() == true) {
 			if (child > 0) {
-				// In case child node exist of deleted word
+				// En caso de que exista un nodo secundario de la palabra eliminada
 				nodo->es_Palabra(false);
 			}
 			else {
@@ -307,4 +307,91 @@ inline NodoTernario* ArbolBT::remover_recursivo(NodoTernario* nodo, std::string 
 	}
 
 	return nodo;
+}
+
+inline void ArbolBT::imprimir() {
+	char buffer[1000];
+	NodoBasico* cabeza = new NodoBasico();
+	imprimir_ayuda(raiz_, buffer, 0, cabeza);
+
+	ArbolBin<NodoBasico> impresora(cabeza->getHijos().front(), &NodoBasico::getHijos, &NodoBasico::getDato);
+	impresora.print();
+}
+
+inline NodoTernario* ArbolBT::crear_si_no_existe(NodoTernario* arbol, NodoTernario*& hijo, std::string label) {
+	if (hijo == nullptr) {
+		hijo = new NodoTernario(' ');
+	}
+		
+	return hijo;
+}
+
+inline void ArbolBT::imprimir_ayuda(NodoTernario* raiz, char* buffer, int profundidad, NodoBasico* cabeza) {
+	if (raiz != nullptr) {
+		NodoBasico* nodo = new NodoBasico("[ " + std::string(1, raiz->valor()) + " ]");
+		imprimir_ayuda(raiz->izquierda(), buffer, profundidad, nodo);
+		cabeza->nodosHijos(nodo);
+		imprimir_ayuda(raiz->medio(), buffer, profundidad + 1, nodo);
+		imprimir_ayuda(raiz->derecha(), buffer, profundidad, nodo);
+	}
+}
+
+inline void ArbolBT::insertar_recursivo(NodoTernario* arbol, std::string valor) {
+	if (valor.length() == 0) {
+		arbol->es_Palabra(true);
+		return;
+	}
+	else {
+		if (arbol->valor() == ' ') {
+			arbol->valor(valor.at(0));
+
+			if (arbol->medio() == nullptr) {
+				std::string label = "=" + std::string(1, valor.at(0));
+				NodoTernario* nodo = arbol->medio();
+
+				if (nodo == nullptr) {
+					nodo = new NodoTernario(' ');
+				}
+
+				arbol->medio(nodo);
+				arbol->medio()->padre(arbol);
+			}
+
+			insertar_recursivo(arbol->medio(), valor.substr(1));
+		}
+		else if (arbol->valor() == valor.at(0)) {
+			insertar_recursivo(arbol->medio(), valor.substr(1));
+		}
+		else {
+			NodoTernario* hijo = nullptr;
+			std::string label;
+
+			if (arbol->valor() > valor.at(0)) {
+				label = "<" + arbol->valor();
+				NodoTernario* nodo = arbol->izquierda();
+
+				if (nodo == nullptr) {
+					nodo = new NodoTernario(' ');
+				}
+
+				arbol->izquierda(nodo);
+				arbol->izquierda()->padre(arbol);
+				hijo = arbol->izquierda();
+			}
+			else {
+				label = ">" + arbol->valor();
+				NodoTernario* nodo = arbol->derecha();
+
+				if (nodo == nullptr) {
+					nodo = new NodoTernario(' ');
+				}
+
+				arbol->derecha(nodo);
+				arbol->derecha()->padre(arbol);
+				hijo = arbol->derecha();
+			}
+
+			insertar_recursivo(hijo, valor);
+		}
+	}
 }
