@@ -4,10 +4,10 @@
 #include <vector>
 #include <windows.h>
 
-#define LLAVE_UP 72
-#define LLAVE_DOWN 80
-#define LLAVE_LEFT 77
-#define LLAVE_RIGHT 75
+#define LLAVE_ARRIBA 72
+#define LLAVE_ABAJO 80
+#define LLAVE_DERECHA 77
+#define LLAVE_IZQUIERDA 75
 #define LLAVE_ENTER 13
 #define LLAVE_ESCAPE 27
 
@@ -17,14 +17,14 @@ class Consola
 public:
     Consola(Consola const&) = delete;
     Consola& operator=(Consola const&) = delete;
-    static Consola& get();
+    static Consola& obtener();
 
     void print(std::string text, COORD coord);
     void limpiar_linea(short y);
     void limpiar_pantalla();
     void limpiar_area(SMALL_RECT area);
     void set_cursor_posicion(COORD coord);
-    COORD get_consola_size();
+    COORD get_tamano_consola();
 
 private:
     Consola();
@@ -33,7 +33,7 @@ private:
 class Menu {
 public:
     Menu();
-    Menu(std::string title);
+    Menu(std::string titulo);
 
     /**
      * @brief agrega una opcion al menu
@@ -45,33 +45,33 @@ public:
      * @brief remueve una opcion del menu
      * @param index indice de la opcion a eliminar
      */
-    void eliminar_opciones(int index);
+    void eliminar_opciones(int indice);
 
     /**
      * @brief muestra el menu
      */
-    void display();
+    void mostrar();
 
     /**
      * @brief detiene el menu
      */
-    void stop();
+    void parar();
 
     /**
      * @brief verifica si el menu esta detenido.
      * @return true si esta corriendo, caso contrario devuelve true
     */
-    bool is_running();
+    bool corriendo();
 
-    MenuOpciones opciones_salir(std::string label = "Salir", bool pausar = false) {
-        return MenuOpciones(label, [&]() {
-            stop();
+    MenuOpciones opciones_salir(std::string etiqueta = "Salir", bool pausar = false) {
+        return MenuOpciones(etiqueta, [&]() {
+            parar();
             }, pausar);
     }
 
 private:
-    std::string title;
+    std::string titulo;
     std::vector<MenuOpciones> opciones;
-    HANDLE conhandler;
-    bool running = false;
+    HANDLE etfdr;
+    bool correr = false;
 };

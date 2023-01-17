@@ -3,30 +3,30 @@
 #include <vector>
 
 Menu::Menu() {
-    conhandler = GetStdHandle(STD_OUTPUT_HANDLE);
+    etfdr = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
 Menu::Menu(std::string ti) {
-    this->title = title;
-    conhandler = GetStdHandle(STD_OUTPUT_HANDLE);
+    this->titulo = ti;
+    etfdr = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
 void Menu::add_opciones(MenuOpciones opcion) {
     opciones.push_back(opcion);
 }
 
-void Menu::eliminar_opciones(int index) {
-    if (index < 0 || index > opciones.size()) {
+void Menu::eliminar_opciones(int indice) {
+    if (indice < 0 || indice > opciones.size()) {
         return;
     }
 
     std::vector<MenuOpciones>::iterator it = opciones.begin();
-    std::advance(it, index);
+    std::advance(it, indice);
     opciones.erase(it);
 }
 
-void Menu::display() {
-    int selected = 1;
+void Menu::mostrar() {
+    int seleccionar = 1;
 
     if (opciones.empty()) {
         return;
@@ -35,25 +35,25 @@ void Menu::display() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     WORD csbi_defaults;
 
-    GetConsoleScreenBufferInfo(conhandler, &csbi);
+    GetConsoleScreenBufferInfo(etfdr, &csbi);
     csbi_defaults = csbi.wAttributes;
 
-    running = true;
+    correr = true;
 
-    Consola& consola = Consola::get();
+    Consola& consola = Consola::obtener();
 
-    consola.limpiar_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
+    consola.limpiar_area({ 0, 2, consola.get_tamano_consola().X, consola.get_tamano_consola().Y });
     consola.set_cursor_posicion({ 0, 2 });
-
-    while (running) {
+    
+    while (correr) {
         int posicion = 1;
 
-        consola.limpiar_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
+        consola.limpiar_area({ 0, 2, consola.get_tamano_consola().X, consola.get_tamano_consola().Y });
         consola.set_cursor_posicion({ 0, 2 });
 
         std::vector<MenuOpciones> visible_opciones;
 
-        std::cout << std::endl << title << std::endl << std::endl;
+        std::cout << std::endl << titulo << std::endl << std::endl;
 
         for (MenuOpciones opcion : opciones) {
             if (opcion.visible()) {
@@ -69,12 +69,12 @@ void Menu::display() {
                 opcion.get_args().add("__index", posicion - 1);
             }
 
-            if (posicion++ == selected) {
-                SetConsoleTextAttribute(conhandler, 23);
+            if (posicion++ == seleccionar) {
+                SetConsoleTextAttribute(etfdr, 23);
             }
 
             std::cout << " " << opcion.get_etiqueta() << " " << std::endl;
-            SetConsoleTextAttribute(conhandler, csbi_defaults);
+            SetConsoleTextAttribute(etfdr, csbi_defaults);
         }
 
         int llave;
@@ -93,27 +93,27 @@ void Menu::display() {
                 llave = getch();
             }
 #endif
-        } while (llave != LLAVE_UP && llave != LLAVE_DOWN && llave != LLAVE_ENTER);
+        } while (llave != LLAVE_ARRIBA && llave != LLAVE_ABAJO && llave != LLAVE_ENTER);
 
         switch (llave) {
-        case LLAVE_UP: {
-            selected--;
+        case LLAVE_ARRIBA: {
+            seleccionar--;
 
-            if (selected < 1) {
-                selected = visible_opciones.size();
+            if (seleccionar < 1) {
+                seleccionar = visible_opciones.size();
             }
         }
                    break;
-        case LLAVE_DOWN: {
-            selected++;
+        case LLAVE_ABAJO: {
+            seleccionar++;
 
-            if (selected > visible_opciones.size()) {
-                selected = 1;
+            if (seleccionar > visible_opciones.size()) {
+                seleccionar = 1;
             }
         }
                      break;
         case LLAVE_ENTER: {
-            MenuOpciones opciones = visible_opciones.at(selected - 1);
+            MenuOpciones opciones = visible_opciones.at(seleccionar - 1);
             std::cout << std::endl << std::endl;
             opciones.ejecutar();
 
@@ -128,77 +128,77 @@ void Menu::display() {
     }
 }
 
-void Menu::stop() {
-    running = false;
+void Menu::parar() {
+    correr = false;
 }
 
-bool Menu::is_running() {
-    return running;
+bool Menu::corriendo() {
+    return correr;
 }
 
 Consola::Consola() {}
 
-Consola& Consola::get() {
-    static Consola instance;
-    return instance;
+Consola& Consola::obtener() {
+    static Consola instancia;
+    return instancia;
 }
 
-void Consola::print(std::string text, COORD coord) {
-    CHAR_INFO* buffer = (CHAR_INFO*)calloc(text.size(), sizeof(CHAR_INFO));
+void Consola::print(std::string texto, COORD coord) {
+    CHAR_INFO* buffer = (CHAR_INFO*)calloc(texto.size(), sizeof(CHAR_INFO));
 
     if (buffer == 0) {
         return;
     }
 
-    COORD consola_size = get_consola_size();
+    COORD consola_size = get_tamano_consola();
     SMALL_RECT posicion = {
         coord.X, // left
         coord.Y, // top
-        coord.X + text.length(), // right
+        coord.X + texto.length(), // right
         coord.Y + 1 // bottom
     };
-    HANDLE consola_handler = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD buffer_size = { text.size(), 1 };
+    HANDLE manejo_consola = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD tamanio_buffer = { texto.size(), 1 };
 
     int i = 0;
 
-    for (const char c : text) {
+    for (const char c : texto) {
         buffer[i].Char.AsciiChar = c;
         buffer[i].Attributes = 15;
         i++;
     }
 
-    WriteConsoleOutputA(consola_handler, buffer, buffer_size, { 0, 0 }, &posicion);
+    WriteConsoleOutputA(manejo_consola, buffer, tamanio_buffer, { 0, 0 }, &posicion);
     free(buffer);
 }
 
 void Consola::limpiar_linea(short y) {
-    COORD consola_size = get_consola_size();
+    COORD tamanio_consola = get_tamano_consola();
 
-    if (y < 0 || y > consola_size.Y) return;
+    if (y < 0 || y > tamanio_consola.Y) return;
 
-    std::string empty(consola_size.X, ' ');
-    print(empty, { 0, y });
+    std::string vacio(tamanio_consola.X, ' ');
+    print(vacio, { 0, y });
 }
 
 void Consola::limpiar_pantalla() {
-    COORD consola_size = get_consola_size();
-    limpiar_area({ 0, 0, consola_size.X, consola_size.Y });
+    COORD tamanio_consola = get_tamano_consola();
+    limpiar_area({ 0, 0, tamanio_consola.X, tamanio_consola.Y });
 }
 
 void Consola::set_cursor_posicion(COORD coord) {
-    HANDLE consola_handler = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(consola_handler, coord);
+    HANDLE manejo_consola = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(manejo_consola, coord);
 }
 
 void Consola::limpiar_area(SMALL_RECT area) {
     int x = area.Left;
     int y = area.Top;
-    int width = area.Right - area.Left;
-    int height = area.Bottom - area.Top;
+    int ancho = area.Right - area.Left;
+    int altura = area.Bottom - area.Top;
 
-    std::string spaces = std::string(width * height, ' ');
-    CHAR_INFO* buffer = (CHAR_INFO*)calloc(spaces.size(), sizeof(CHAR_INFO));
+    std::string espacios = std::string(ancho * altura, ' ');
+    CHAR_INFO* buffer = (CHAR_INFO*)calloc(espacios.size(), sizeof(CHAR_INFO));
 
     if (buffer == 0) {
         return;
@@ -207,24 +207,24 @@ void Consola::limpiar_area(SMALL_RECT area) {
     SMALL_RECT posicion = {
         x, // left
         y, // top
-        x + width, // right
-        y + height // bottom
+        x + ancho, // right
+        y + altura // bottom
     };
-    COORD buffer_size = { width, height };
-    HANDLE consola_handler = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD tamanio_buffer = { ancho, altura };
+    HANDLE manejo_consola = GetStdHandle(STD_OUTPUT_HANDLE);
     int i = 0;
 
-    for (const char c : spaces) {
+    for (const char c : espacios) {
         buffer[i].Char.AsciiChar = c;
         buffer[i].Attributes = 15;
         i++;
     }
 
-    WriteConsoleOutputA(consola_handler, buffer, buffer_size, { 0, 0 }, &posicion);
+    WriteConsoleOutputA(manejo_consola, buffer, tamanio_buffer, { 0, 0 }, &posicion);
     free(buffer);
 }
 
-COORD Consola::get_consola_size() {
+COORD Consola::get_tamano_consola() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     int columnas, filas;
 
@@ -232,7 +232,7 @@ COORD Consola::get_consola_size() {
     columnas = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     filas = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 
-    COORD size = { columnas, filas };
+    COORD tamanio = { columnas, filas };
 
-    return size;
+    return tamanio;
 }
