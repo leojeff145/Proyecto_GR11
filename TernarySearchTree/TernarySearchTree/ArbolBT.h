@@ -21,7 +21,7 @@ public:
 
 private:
 	void escribir_recursivo(NodoTernario* p, std::ostream& out);
-	int leer_recursivo(NodoTernario*& raiz, std::istream& in);
+	int leer_recursivo(NodoTernario*& raiz, std::ifstream& in);
 	void atravesar_recursivo(NodoTernario* raiz, std::function<void(char valor)>cb);
 	void insertar_recursivo(NodoTernario* arbol, std::string valor);
 	NodoTernario* encontrar_recursivo(NodoTernario* arbol, std::string valor);
@@ -76,5 +76,198 @@ inline void ArbolBT::escribir_recursivo(NodoTernario* raiz, std::ostream& out) {
 	escribir_recursivo(raiz->derecha(), out);
 }
 
-inline int ArbolBT
+inline int ArbolBT::leer_recursivo(NodoTernario*& raiz, std::ifstream& in) {
+	std::string linea;
+	getline(in, linea);
+	
+	if (linea == "Vacio") {
+		raiz = nullptr;
+		return 0;
+	}
+	
+	raiz = new NodoTernario(linea[0]);
+	leer_recursivo(raiz->izquierda(),in);
+	leer_recursivo(raiz->medio(), in);
+	leer_recursivo(raiz->derecha(), in);
+	return 0;
+}
 
+inline void ArbolBT::atravesar_recursivo(NodoTernario* raiz, std::function<void(char valor)> cb) {
+	if (raiz != nullptr) {		
+		atravesar_recursivo(raiz->izquierda(), cb);
+		cb(raiz->valor());
+		atravesar_recursivo(raiz->medio(), cb);
+		atravesar_recursivo(raiz->derecha(), cb);
+	}
+}
+
+inline void ArbolBT::insertar(std::string valor) {
+	std::string insertar_valor = Ayudas::uppercase(valor);
+	std::regex padre("[^a-z]");
+	std::smatch sm;
+	
+	std::regex_replace(insertar_valor, padre, "");
+	
+	if (insertar_valor.empty()) {
+		return;
+	}
+	
+	if (raiz_ == nullptr) {
+		raiz_ = new NodoTernario(insertar_valor[0]);
+	}
+	
+	insertar_recursivo(raiz_, Ayudas::uppercase(valor));
+}
+
+inline NodoTernario* ArbolBT::encontrar(std::string valor) {
+	valor = Ayudas::uppercase(valor);
+	std::regex padre("[^a-z]");
+	std::regex_replace(valor, padre, "");
+	return encontrar_recursivo(raiz_, valor);
+}
+
+inline NodoTernario* ArbolBT::encontrar_recursivo(NodoTernario* arbol, std::string valor) {
+	if (arbol == nullptr){
+		return nullptr;
+	}
+	
+	if (valor.length() == 0) {
+		if (arbol->es_Palabra() == true) {
+			return arbol;
+		}else {
+			return nullptr;
+		}
+	} else{
+		NodoTernario* hijo = nullptr;
+		
+		if (arbol->valor() == ' ') {
+			return nullptr;
+		}
+		
+		if (arbol->valor() == valor.at(0)) {
+			valor = valor.substr(1);
+			hijo = arbol->medio();
+		}
+		else if (arbol->valor() > valor.at(0)) {
+			hijo = arbol->izquierda();
+		}
+		else {
+			hijo = arbol->derecha();
+		}
+
+		if (hijo != nullptr) {
+			// ...
+		}
+		else {
+			// ...
+		}
+
+		return encontrar_recursivo(hijo, valor);
+	}			
+}
+
+inline void ArbolBT::limpieza_eliminacion(NodoTernario* arbol) {
+	if (arbol == nullptr) {
+		return;
+	}
+	else if (arbol->medio() == nullptr) {
+		return;
+	}
+	else if (arbol->medio() == nullptr && arbol->derecha() == nullptr && arbol->izquierda() == nullptr && arbol->es_Palabra() == true) {
+		return;
+	}
+	else if (arbol->medio() == nullptr && arbol->izquierda() == nullptr && arbol->derecha() == nullptr) {
+		if (arbol->padre() == nullptr) {
+			raiz_ = nullptr;
+		}
+		else if (arbol->padre()->izquierda() == arbol) {
+			arbol->padre()->izquierda(nullptr);
+		}
+		else if (arbol->padre()->derecha() == arbol) {
+			arbol->padre()->derecha(nullptr);
+		}
+		else if (arbol->padre()->medio() == arbol) {
+			arbol->padre()->medio(nullptr);
+		}
+
+		limpieza_eliminacion(arbol->padre());
+	}
+	else if ((arbol->izquierda() == nullptr && arbol->medio() == nullptr) || (arbol->derecha() == nullptr && arbol->medio() == nullptr)) {
+		NodoTernario* hijo = nullptr;
+
+		if (arbol->izquierda() != nullptr) {
+			hijo = arbol->izquierda();
+		}
+		else {
+			hijo = arbol->derecha();
+		}
+
+		if (arbol->padre() == nullptr) {
+			raiz_ = hijo;
+		}
+		else if (arbol->padre()->izquierda() == arbol) {
+			arbol->padre()->izquierda(hijo);
+			hijo->padre(arbol->padre());
+		}
+		else if (arbol->padre()->derecha() == arbol) {
+			arbol->padre()->derecha(hijo);
+			hijo->padre(arbol->padre());
+		}
+		else if (arbol->padre()->medio() == arbol) {
+			hijo->padre(arbol->padre());
+			arbol->padre()->medio(hijo);
+		}
+		else {
+			// ...
+		}
+	}
+	else if (arbol->derecha() != nullptr && arbol->medio() != nullptr && arbol->derecha() != nullptr) {
+		NodoTernario* nodo = arbol->izquierda();
+		NodoTernario* nodo = arbol->padre();
+
+		while (nodo->derecha() != nullptr) {
+			nodo = nodo->derecha();
+		}
+
+		if (arbol->izquierda() != nodo) {
+			nodo->padre()->derecha(nodo->izquierda());
+
+			if (nodo->izquierda() != nullptr) {
+				nodo->izquierda()->padre(nodo->padre());
+			}
+
+			nodo->derecha(arbol->derecha());
+			nodo->izquierda(arbol->izquierda());
+			arbol->derecha()->padre(nodo);
+			arbol->izquierda()->padre(nodo);
+		}
+		else {
+			nodo->derecha(arbol->derecha());
+			nodo->derecha()->padre(nodo);
+		}
+
+		nodo->padre(arbol->padre());
+
+		if (nodo->padre() == nullptr) {
+			raiz_ = nodo;
+		}
+		else {
+			if (arbol->padre()->izquierda() == arbol) {
+				arbol->padre()->izquierda(nodo);
+				nodo->padre(arbol->padre());
+			}
+			else if (arbol->padre()->derecha() == arbol) {
+				arbol->padre()->derecha(nodo);
+				nodo->padre(arbol->padre());
+			}
+			else if (arbol->padre()->medio() == arbol) {
+				arbol->padre()->medio(nodo);
+				nodo->padre(arbol->padre());
+			}
+		}
+	}
+}
+
+inline void ArbolBT::remover(std::string valor) {
+	remover_recursivo(raiz_, valor, 0);
+}
