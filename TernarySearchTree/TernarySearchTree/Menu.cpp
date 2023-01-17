@@ -11,7 +11,7 @@ Menu::Menu(std::string ti) {
     conhandler = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
-void Menu::add_opciones(MenuOpciones opcion) {
+void Menu::add_opciones(MenuOpciones opciones) {
     opciones.push_back(opcion);
 }
 
