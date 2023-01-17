@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="Gestor_app.cpp" />
+    <ClCompile Include="Gestor_Confirmacion.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md5.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -144,6 +145,8 @@
     <ClInclude Include="CDLlist.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Gestor_app.h" />
+    <ClInclude Include="Gestor_Confirmacion.h" />
+    <ClInclude Include="Titulo.h" />
     <ClInclude Include="md5.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Menu_Opciones.h" />
