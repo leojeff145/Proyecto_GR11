@@ -149,6 +149,7 @@
     <ClInclude Include="Menu_Opciones.h" />
     <ClInclude Include="Modelo.h" />
     <ClInclude Include="NodoAB.h" />
+    <ClInclude Include="Titulo.h" />
     <ClInclude Include="Usuario.h" />
     <ClInclude Include="Validaciones.h" />
     <ClInclude Include="Nodo.h" />
