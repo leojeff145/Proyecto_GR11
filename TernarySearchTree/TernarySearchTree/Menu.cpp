@@ -11,8 +11,8 @@ Menu::Menu(std::string ti) {
     conhandler = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
-void Menu::add_opciones(MenuOpciones opciones) {
-    opciones.push_back(opciones);
+void Menu::add_opciones(MenuOpciones opcion) {
+    opciones.push_back(opcion);
 }
 
 void Menu::remove_opciones(int index) {
@@ -46,7 +46,7 @@ void Menu::display() {
     consola.set_cursor_position({ 0, 2 });
 
     while (running) {
-        int position = 1;
+        int posicion = 1;
 
         consola.clear_area({ 0, 2, consola.get_consola_size().X, consola.get_consola_size().Y });
         consola.set_cursor_position({ 0, 2 });
@@ -55,47 +55,47 @@ void Menu::display() {
 
         std::cout << std::endl << title << std::endl << std::endl;
 
-        for (MenuOpciones option : opciones) {
-            if (opciones.visible()) {
-                visible_opciones.push_back(opciones);
+        for (MenuOpciones opcion : opciones) {
+            if (opcion.visible()) {
+                visible_opciones.push_back(opcion);
             }
         }
 
-        for (MenuOpciones option : visible_opciones) {
-            if (option.get_args().has("__index")) {
-                option.get_args().set("__index", position - 1);
+        for (MenuOpciones opcion : visible_opciones) {
+            if (opcion.get_args().has("__index")) {
+                opcion.get_args().set("__index", posicion - 1);
             }
             else {
-                option.get_args().add("__index", position - 1);
+                opcion.get_args().add("__index", posicion - 1);
             }
 
-            if (position++ == selected) {
+            if (posicion++ == selected) {
                 SetConsoleTextAttribute(conhandler, 23);
             }
 
-            std::cout << " " << option.get_label() << " " << std::endl;
+            std::cout << " " << opcion.get_etiqueta() << " " << std::endl;
             SetConsoleTextAttribute(conhandler, csbi_defaults);
         }
 
-        int key;
+        int llave;
 
         do {
 #ifdef _MSC_VER
-            key = _getch();
+            llave = _getch();
 
-            if (key == 0) {
-                key = _getch();
+            if (llave == 0) {
+                llave = _getch();
             }
 #else
-            key = getch();
+            llave = getch();
 
-            if (key == 0) {
-                key = getch();
+            if (llave == 0) {
+                llave = getch();
             }
 #endif
-        } while (key != LLAVE_UP && key != LLAVE_DOWN && key != LLAVE_ENTER);
+        } while (llave != LLAVE_UP && llave != LLAVE_DOWN && llave != LLAVE_ENTER);
 
-        switch (key) {
+        switch (llave) {
         case LLAVE_UP: {
             selected--;
 
@@ -115,7 +115,7 @@ void Menu::display() {
         case LLAVE_ENTER: {
             MenuOpciones opciones = visible_opciones.at(selected - 1);
             std::cout << std::endl << std::endl;
-            opciones.execute();
+            opciones.ejecutar();
 
             if (opciones.should_wait()) {
                 std::cout << std::endl << std::endl;
@@ -151,7 +151,7 @@ void Consola::print(std::string text, COORD coord) {
     }
 
     COORD console_size = get_consola_size();
-    SMALL_RECT position = {
+    SMALL_RECT posicion = {
         coord.X, // left
         coord.Y, // top
         coord.X + text.length(), // right
@@ -168,7 +168,7 @@ void Consola::print(std::string text, COORD coord) {
         i++;
     }
 
-    WriteConsoleOutputA(consola_handler, buffer, buffer_size, { 0, 0 }, &position);
+    WriteConsoleOutputA(consola_handler, buffer, buffer_size, { 0, 0 }, &posicion);
     free(buffer);
 }
 
@@ -204,7 +204,7 @@ void Consola::clear_area(SMALL_RECT area) {
         return;
     }
 
-    SMALL_RECT position = {
+    SMALL_RECT posicion = {
         x, // left
         y, // top
         x + width, // right
@@ -220,7 +220,7 @@ void Consola::clear_area(SMALL_RECT area) {
         i++;
     }
 
-    WriteConsoleOutputA(console_handler, buffer, buffer_size, { 0, 0 }, &position);
+    WriteConsoleOutputA(console_handler, buffer, buffer_size, { 0, 0 }, &posicion);
     free(buffer);
 }
 

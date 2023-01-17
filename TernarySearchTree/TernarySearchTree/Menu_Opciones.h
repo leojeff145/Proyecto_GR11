@@ -127,15 +127,15 @@ typedef std::function<void()> MenuOpcionesCallback2;
 
 class MenuOpciones {
 public:
-    MenuOpciones(std::string label, MenuOpcionesCallback regresar);
-    MenuOpciones(std::string label, MenuOpcionesCallback regresar, bool esperar_despues_ejecucion);
-    MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento);
-    MenuOpciones(std::string label, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
 
-    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, bool esperar_despues_ejecucion);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento);
-    MenuOpciones(std::string label, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, bool esperar_despues_ejecucion);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento);
+    MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion);
 
     bool visible();
     void visible(bool visible);
@@ -145,12 +145,12 @@ public:
      * @brief obtiene la etiqueta de la opcion del menu
      * @return
     */
-    std::string get_label();
+    std::string get_etiqueta();
 
     /**
      * @brief ejecuta la accion de esta opcion del menu
     */
-    void execute();
+    void ejecutar();
 
     /**
      * @brief verifica si esta opcion deberia esperar al usuario
@@ -165,7 +165,7 @@ public:
     MenuOpcionesArgumentos& get_args();
 
 private:
-    std::string label;
+    std::string etiqueta;
     std::optional<MenuOpcionesCallback> regresar;
     std::optional<MenuOpcionesCallback2> regresar2;
     bool esperar_despues_ejecucion = true;
