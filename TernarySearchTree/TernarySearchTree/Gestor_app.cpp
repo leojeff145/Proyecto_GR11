@@ -58,3 +58,53 @@ void Gestor_app::generarPDF() {
 
 	system((std::string("pdf ./") + insertar + "./" +extraer).c_str());
 }
+
+void Gestor_app::menu_opArbol() {
+	Menu menu("Arbol Ternario");
+
+	menu.add_opciones(MenuOpciones("insertar", [&]() {
+		std::string valor = Validaciones::leer_con_formato("ingrese un valor: ", "[a-z]+");
+	arbol->insertar(valor);
+
+	std::cout << std::endl;
+	arbol->imprimir();
+		}));
+	menu.add_opciones(MenuOpciones("buscar", [&]() {
+		std::string valor = Validaciones::leer_con_formato("ingrese un valor: ", "[a-z]+");
+	NodoTernario* encontrado = arbol->encontrar(valor);
+
+	if (encontrado != nullptr) {
+		std::cout << "el valor '" << valor << "' fue encontrado" << std::endl << std::endl;
+		arbol->imprimir();
+	}
+	else {
+		std::cout << "el valor '" << valor << "' no fue encontrado" << std::endl << std::endl;
+	}
+		}));
+
+	menu.add_opciones(MenuOpciones("eliminar", [&]() {
+			std::string valor = Validaciones::leer_con_formato("ingrese un valor: ", "[a-z]+");
+		NodoTernario* encontrado = arbol->encontrar(valor);
+
+		if (encontrado != nullptr) {
+			arbol->remover(valor);
+			arbol->imprimir();
+		}
+		else {
+			std::cout << "el valor '" << valor << "' no fue encontrado" << std::endl << std::endl;
+		}
+		}));
+
+	menu.add_opciones(MenuOpciones("Imprimir inorden", [&]() {
+			arbol->atravesar([](char v) {
+				std::cout << v << " -> ";
+				});
+		}));
+
+	menu.add_opciones(MenuOpciones("Imprimir", [&]() {
+			arbol->imprimir();
+		}));
+
+	menu.add_opciones(menu.opciones_salir("Salir"));
+	menu.mostrar();
+}

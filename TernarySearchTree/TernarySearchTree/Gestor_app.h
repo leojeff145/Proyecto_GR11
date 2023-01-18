@@ -14,9 +14,13 @@ class Gestor_app{
         void pixelar_imagen();
         void guardar_copia();
         void cargar_copia();
-        void menu_opcion_arbol();
+        void menu_opArbol();
 
       private:
         ArbolBT* arbol;
 };
 
+int Gestor_app::iniciar() {
+    SetConsoleOutputCP(65001);
+
+}
