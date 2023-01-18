@@ -85,16 +85,16 @@ public:
 
     bool has(std::string llave);
 private:
-    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>> *argumento;
+    std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>> *argumentos;
 };
 
 inline MenuOpcionesArgumentos::MenuOpcionesArgumentos() {
-    argumento = new std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>>();
+    argumentos = new std::map<std::string, std::unique_ptr<MenuOpcionesArgumentoBase>>();
 }
 
 template <typename T>
 void MenuOpcionesArgumentos::add(std::string llave, MenuOpcionesArgumento<T> *argumento) {
-    (*argumento)[llave] = std::unique_ptr<MenuOpcionesArgumentoBase>(argumento);
+    (*argumentos)[llave] = std::unique_ptr<MenuOpcionesArgumentoBase>(argumento);
 }
 
 template <typename T>
@@ -104,18 +104,18 @@ void MenuOpcionesArgumentos::add(std::string llave, T valor) {
 
 template <typename T>
 T MenuOpcionesArgumentos::get(std::string llave) {
-    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[llave]));
+    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumentos)[llave]));
     return arg.get_valor();
 }
 
 template <typename T>
 void MenuOpcionesArgumentos::set(std::string llave, T valor) {
-    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumento)[llave]));
+    auto arg = dynamic_cast<MenuOpcionesArgumento<T>&>(*((*argumentos)[llave]));
     arg.set_valor(valor);
 }
 
 inline bool MenuOpcionesArgumentos::has(std::string llave) {
-    return !(argumento->find(llave) == argumento->end());
+    return !(argumentos->find(llave) == argumentos->end());
 }
 
 #endif
@@ -169,7 +169,7 @@ private:
     std::optional<MenuOpcionesCallback> regresar;
     std::optional<MenuOpcionesCallback2> regresar2;
     bool esperar_despues_ejecucion = true;
-    MenuOpcionesArgumentos argumento;
+    MenuOpcionesArgumentos argumentos;
     std::function<bool()> regreso_visible_ = []() { return true; };
 };
 

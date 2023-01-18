@@ -174,7 +174,7 @@ void CDLlist<T>::paraCada(std::function<void(Nodo<T>*, int)> devolver) {
 	Nodo<T>* act = cabeza;
 	int actual = 0;
 
-	if (actual == nullptr) {
+	if (act == nullptr) {
 		return;
 	}do {
 		devolver(act, actual);
@@ -309,7 +309,7 @@ Nodo<T>* CDLlist<T>::nAct(int actual) {
 	int actual_indice = 0;
 	Nodo<T>* act = cabeza;
 	while (true) {
-		if (actual_indice > 0 && actual == cabeza) {
+		if (actual_indice > 0 && act == cabeza) {
 			break;
 		}
 		if (actual_indice == actual) {

@@ -7,6 +7,8 @@
 #include <regex>
 #include "Validaciones.h"
 
+
+
 Fecha::Fecha()
 {
 }
@@ -20,12 +22,13 @@ Fecha::Fecha(int dia, int mes, int anio)
     if (!Fecha::valida(*this)) {
         std::time_t t = std::time(0);
         std::tm* now = std::localtime(&t);
-
+  
         this->dia = (now->tm_mday);
         this->mes = (now->tm_mon + 1);
         this->anio = (now->tm_year + 1900);
     }
 }
+
 
 int Fecha::getDia() const
 {

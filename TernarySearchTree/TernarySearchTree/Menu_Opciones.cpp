@@ -12,16 +12,16 @@ MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, 
     this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 
-MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento) {
+MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumentos) {
     this->etiqueta = etiqueta;
     this->regresar = regresar;
-    this->argumento = argumento;
+    this->argumentos = argumentos;
 }
 
-MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion) {
+MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback regresar, MenuOpcionesArgumentos argumentos, bool esperar_despues_ejecucion) {
     this->etiqueta = etiqueta;
     this->regresar = regresar;
-    this->argumento = argumento;
+    this->argumentos = argumentos;
     this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,16 +37,16 @@ MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar,
     this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 
-MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento) {
+MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumentos) {
     this->etiqueta = etiqueta;
     this->regresar2 = regresar;
-    this->argumento = argumento;
+    this->argumentos = argumentos;
 }
 
-MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumento, bool esperar_despues_ejecucion) {
+MenuOpciones::MenuOpciones(std::string etiqueta, MenuOpcionesCallback2 regresar, MenuOpcionesArgumentos argumentos, bool esperar_despues_ejecucion) {
     this->etiqueta = etiqueta;
     this->regresar2 = regresar;
-    this->argumento = argumento;
+    this->argumentos = argumentos;
 	this->esperar_despues_ejecucion = esperar_despues_ejecucion;
 }
 
@@ -68,7 +68,7 @@ std::string MenuOpciones::get_etiqueta() {
 
 void MenuOpciones::ejecutar() {
     if (regresar.has_value()) {
-        regresar.value()(argumento);
+        regresar.value()(argumentos);
     }
     else {
         regresar2.value()();
@@ -80,7 +80,7 @@ bool MenuOpciones::should_wait() {
 }
 
 MenuOpcionesArgumentos& MenuOpciones::get_args() {
-    return argumento;
+    return argumentos;
 }
 
 

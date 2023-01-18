@@ -223,7 +223,7 @@ inline void ArbolBT::limpieza_eliminacion(NodoTernario* arbol) {
 	}
 	else if (arbol->derecha() != nullptr && arbol->medio() != nullptr && arbol->derecha() != nullptr) {
 		NodoTernario* nodo = arbol->izquierda();
-		NodoTernario* nodo = arbol->padre();
+		NodoTernario* padre = arbol->padre();
 
 		while (nodo->derecha() != nullptr) {
 			nodo = nodo->derecha();
