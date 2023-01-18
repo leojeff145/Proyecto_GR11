@@ -148,7 +148,7 @@ inline void CDLlist<T>::eliminar(std::function<bool(T)> devolver) {
 		if (actual > 0 && act == cabeza) {
 			break;
 		}
-		if (devolver(act->get_dato()) {
+		if (devolver(act->get_dato())) {
 			eliminar_actual(actual);
 				break;
 		}

@@ -34,7 +34,7 @@ public:
 private:
 	T* _nd;
 	std::list<std::shared_ptr<NodoAB>> _hijos;
-	std::size_t _profunidad;
+	std::size_t _profundidad;
 
 	std::size_t _wself;
 	std::size_t _whijo;
