@@ -4,8 +4,8 @@
 class Fecha
 {
 public:
-    //Fecha();
-    //Fecha(int dia, int mes, int anio);
+    Fecha();
+    Fecha(int dia, int mes, int anio);
 
     int getDia() const;
     void setDia(int dia);
