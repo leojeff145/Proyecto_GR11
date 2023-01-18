@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+/*#include <string>
 
 class Fecha
 {
@@ -23,5 +23,5 @@ private:
     int dia = 0;
     int mes = 0;
     int anio = 0;
-};
+};*/
 

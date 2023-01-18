@@ -1,5 +1,5 @@
 #pragma once
-#include "Fecha.h"
+/*#include "Fecha.h"
 #include <iostream>
 #include <chrono>
 #include <ctime> 
@@ -151,4 +151,4 @@ bool Fecha::valida(int dia, int mes, int anio)
         return (dia <= 30);
 
     return true;
-}
+}*/

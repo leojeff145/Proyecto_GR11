@@ -10,6 +10,10 @@
 int Gestor_app::iniciar() {
     SetConsoleOutputCP(65001);
 
+
+	Gestor_app aplicacion;
+	aplicacion.correr();
+	return 0;
 }
 
 void Gestor_app::correr() {
@@ -17,17 +21,17 @@ void Gestor_app::correr() {
 	menu.add_opciones(MenuOpciones("Arbol Ternario", [&]() {
 		menu_opArbol();
 		}, false));
-	menu.add_opciones(MenuOpciones("Generar PDF", [&]() {
+	/*menu.add_opciones(MenuOpciones("Generar PDF", [&]() {
 		generarPDF();
-		}));
-	menu.add_opciones(MenuOpciones("Ayuda", [&]() {
+		}));*/
+	/*menu.add_opciones(MenuOpciones("Ayuda", [&]() {
 		ShellExecuteA(NULL, "open", "manual.chm", NULL, NULL, SW_SHOW);
-		}));
+		}));*/
 	menu.add_opciones(menu.opciones_salir("Salir"));
 	menu.mostrar();
 }
 
-void Gestor_app::generarPDF() {
+/*void Gestor_app::generarPDF() {
 	time_t tiempo = time(0);
 	struct tm* nuevo = localtime(&tiempo);
 	std::string tiempot = std::to_string(nuevo->tm_year + 1900) + std::to_string(nuevo->tm_mon + 1) + std::to_string(nuevo->tm_mday) + std::to_string(nuevo->tm_hour) + std::to_string(nuevo->tm_min) + std::to_string(nuevo->tm_sec);
@@ -57,7 +61,7 @@ void Gestor_app::generarPDF() {
 	enArchivo.close();
 
 	system((std::string("pdf ./") + insertar + "./" +extraer).c_str());
-}
+}*/
 
 void Gestor_app::menu_opArbol() {
 	Menu menu("Arbol Ternario");
