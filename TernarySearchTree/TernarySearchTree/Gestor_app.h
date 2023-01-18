@@ -20,3 +20,7 @@ class Gestor_app{
         ArbolBT* arbol;
 };
 
+int Gestor_app::iniciar() {
+    SetConsoleOutputCP(65001);
+
+}
