@@ -3,7 +3,7 @@
 
 class NodoTernario
 {
-public:
+private:
 	char val;
 	NodoTernario* izq = nullptr;
 	NodoTernario* der = nullptr;
