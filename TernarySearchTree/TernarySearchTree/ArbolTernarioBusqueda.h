@@ -16,12 +16,9 @@ public:
 	NodoTernario* find(std::string valor);
 	void print();
 	void traverse(std::function<void(char value)> cb);
-	//void write(std::ostream& out);
-	//NodoTernario* read(std::string nombreArchivo);
+	
 
-private:
-	//void write_recursive(NodoTernario* p, std::ostream& out);
-	//int read_recursive(NodoTernario*& root, std::ifstream& in);
+private:	
 	void traverse_recursive(NodoTernario* root, std::function<void(char value)> cb);
 	void insert_recursive(NodoTernario* tree, std::string value);
 	NodoTernario* find_recursive(NodoTernario*& tree, std::string value);
@@ -52,47 +49,6 @@ private:
 inline void ArbolTernarioBusqueda::traverse(std::function<void(char value)> cb) {
 	traverse_recursive(raiz_, cb);
 }
-
-/*inline void ArbolTernarioBusqueda::write(std::ostream& out) {
-	write_recursive(raiz_, out);
-}*/
-
-/*inline NodoTernario* ArbolTernarioBusqueda::read(std::string filename) {
-	NodoTernario* root;
-	std::ifstream file(filename.c_str());
-	read_recursive(root, file);
-	raiz_ = root;
-	return root;
-}*/
-
-/*inline void ArbolTernarioBusqueda::write_recursive(NodoTernario* root, std::ostream& out) {
-	if (root == nullptr) {
-		out << "null" << std::endl;
-		return;
-	}
-
-	out << root->value() << std::endl;
-	write_recursive(root->left(), out);
-	write_recursive(root->middle(), out);
-	write_recursive(root->right(), out);
-}*/
-
-/*inline int ArbolTernarioBusqueda::read_recursive(NodoTernario*& root, std::ifstream& in) {
-	std::string line;
-	getline(in, line);
-
-	if (line == "null") {
-		root = nullptr;
-		return 0;
-	}
-
-	root = new NodoTernario(line[0]);
-	read_recursive(root->left(), in);
-	read_recursive(root->middle(), in);
-	read_recursive(root->right(), in);
-
-	return 0;
-}*/
 
 inline void ArbolTernarioBusqueda::traverse_recursive(NodoTernario* root, std::function<void(char value)> cb) {
 	if (root != nullptr) {
