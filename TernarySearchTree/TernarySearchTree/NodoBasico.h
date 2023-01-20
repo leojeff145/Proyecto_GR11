@@ -9,17 +9,18 @@ public:
 
 	virtual ~NodoBasico();
 
-	void nodosHijos(NodoBasico* nd);
-	std::list<NodoBasico*> getHijos();
+	void agregarHijo(NodoBasico* nd);
+	std::list<NodoBasico*> getHijo();
 
 	std::string getDato();
-	void setDato(std::string dato);
+	void setDato(std::string data);
 
 protected:
 	void setPadre(NodoBasico* nd);
 
 	std::string _dato;
 
-	std::list<NodoBasico*> _hijos;
+	std::list<NodoBasico*> _hijo;
 	NodoBasico* _padre;
 };
+

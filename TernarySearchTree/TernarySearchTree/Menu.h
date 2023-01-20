@@ -1,77 +1,77 @@
 #pragma once
-#include "Menu_Opciones.h"
+#include "MenuOpciones.h"
 #include <iostream>
 #include <vector>
 #include <windows.h>
 
-#define LLAVE_ARRIBA 72
-#define LLAVE_ABAJO 80
-#define LLAVE_IZQUIERDA 77
-#define LLAVE_DERECHA 75
-#define LLAVE_ENTER 13
-#define LLAVE_ESCAPE 27
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 77
+#define KEY_RIGHT 75
+#define KEY_ENTER 13
+#define KEY_ESCAPE 27
 
 
-class Consola
+class Console
 {
 public:
-    Consola(Consola const&) = delete;
-    Consola& operator=(Consola const&) = delete;
-    static Consola& obtener();
+    Console(Console const&) = delete;
+    Console& operator=(Console const&) = delete;
+    static Console& get();
 
     void print(std::string text, COORD coord);
-    void limpiar_linea(short y);
-    void limpiar_pantalla();
-    void limpiar_area(SMALL_RECT area);
-    void set_cursor_posicion(COORD coord);
-    COORD get_tamano_consola();
+    void clear_line(short y);
+    void clear_screen();
+    void clear_area(SMALL_RECT area);
+    void set_cursor_position(COORD coord);
+    COORD get_console_size();
 
 private:
-    Consola();
+    Console();
 };
 
 class Menu {
 public:
     Menu();
-    Menu(std::string titulo);
+    Menu(std::string title);
 
     /**
      * @brief agrega una opcion al menu
-     * @param option
+     * @param option 
      */
-    void add_opciones(MenuOpciones opciones);
+    void add_option(MenuOption option);
 
     /**
      * @brief remueve una opcion del menu
      * @param index indice de la opcion a eliminar
      */
-    void eliminar_opciones(int indice);
+    void remove_option(int index);
 
     /**
      * @brief muestra el menu
      */
-    void mostrar();
+    void display();
 
     /**
      * @brief detiene el menu
      */
-    void parar();
+    void stop();
 
     /**
      * @brief verifica si el menu esta detenido.
      * @return true si esta corriendo, caso contrario devuelve true
     */
-    bool corriendo();
+    bool is_running();
 
-    MenuOpciones opciones_salir(std::string etiqueta = "Salir", bool pausar = false) {
-        return MenuOpciones(etiqueta, [&]() {
-            parar();
-            }, pausar);
+    MenuOption opcion_salir(std::string label = "Salir", bool pausar = false) {
+        return MenuOption(label, [&]() {
+            stop();
+        }, pausar);
     }
 
 private:
-    std::string titulo;
-    std::vector<MenuOpciones> opciones;
-    HANDLE etfdr;
-    bool correr = false;
+    std::string title;
+    std::vector<MenuOption> options;
+    HANDLE conhandler;
+    bool running = false;
 };

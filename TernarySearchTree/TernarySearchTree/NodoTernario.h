@@ -1,30 +1,29 @@
 #pragma once
 #include <string>
 
-class NodoTernario
-{
-private:
-	char val;
-	NodoTernario* izq = nullptr;
-	NodoTernario* der = nullptr;
-	NodoTernario* med = nullptr;
-	NodoTernario* pad = nullptr;
-	bool esPalabra = false;
+class NodoTernario {
 public:
-	NodoTernario(char valor);
+	NodoTernario(char value);
 
-	char valor();
-	NodoTernario*& izquierda();
-	NodoTernario*& medio();
-	NodoTernario*& derecha();
-	NodoTernario*& padre();
-	bool es_Palabra();
+	char value();
+	NodoTernario*& left();
+	NodoTernario*& middle();
+	NodoTernario*& right();
+	NodoTernario*& parent();
+	bool is_word();
 
-	void valor(char valor);
-	void izquierda(NodoTernario* izquierda);
-	void medio(NodoTernario* medio);
-	void derecha(NodoTernario* derecha);
-	void padre(NodoTernario* padre);
-	void es_Palabra(bool valor);
+	void value(char value);
+	void left(NodoTernario* left);
+	void middle(NodoTernario* middle);
+	void right(NodoTernario* right);
+	void parent(NodoTernario* parent);
+	void is_word(bool value);
+
+private:
+	char value_;
+	NodoTernario* left_ = nullptr;
+	NodoTernario* middle_ = nullptr;
+	NodoTernario* right_ = nullptr;
+	NodoTernario* parent_ = nullptr;
+	bool is_word_ = false;
 };
-

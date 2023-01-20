@@ -1,10 +1,6 @@
-
-
 #include <iostream>
-#include "Gestor_app.h"
+#include "GestorAplicacion.h"
 
-int main()
-{
-	return Gestor_app::iniciar();
+int main(int argc, char** argv) {
+    return GestorAplicacion::iniciar();
 }
-

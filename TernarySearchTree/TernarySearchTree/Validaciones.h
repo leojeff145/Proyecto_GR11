@@ -19,19 +19,19 @@
 class Validaciones
 {
 public:
-    static inline int es_numero(std::string str) {
+    static inline int is_numeric(std::string str) {
         return !str.empty() && std::find_if(str.begin(),
             str.end(), [](unsigned char c) {
                 return !std::isdigit(c);
-            }) == str.end();
+        }) == str.end();
     }
 
-    inline static std::vector<std::string> splitstr(std::string str, char delimitador) {
+    inline static std::vector<std::string> splitstr(std::string str, char delimiter) {
         std::vector<std::string> values;
         std::stringstream ss(str);
         std::string tok;
 
-        while (std::getline(ss, tok, delimitador)) {
+        while (std::getline(ss, tok, delimiter)) {
             values.push_back(tok);
         }
 
@@ -84,8 +84,8 @@ public:
         return answer;
     }
 
-    inline static std::string leer_contrasenia(std::string label) {
-        std::string contrasenia;
+    inline static std::string leer_password(std::string label) {
+        std::string password;
         int ch = 0;
 
         std::cout << label;
@@ -102,25 +102,23 @@ public:
             }
 
             if (ch == 8) {
-                if (contrasenia.length() != 0) {
+                if (password.length() != 0) {
                     std::cout << "\b \b";
-                    contrasenia.resize(contrasenia.length() - 1);
-                }
-                else {
+                    password.resize(password.length() - 1);
+                } else {
                     Beep(523, 100);
                 }
-            }
-            else {
-                contrasenia += ch;
+            } else {
+                password += ch;
                 std::cout << '*';
             }
         }
 
         std::cout << std::endl;
-
-        return contrasenia;
+        
+        return password;
     }
-
+    
     static inline int convertirEnEntero(std::string cadena)
     {
         int numero = 0;
@@ -331,7 +329,7 @@ public:
     static std::string leer_con_formato(std::string mensaje, std::string formato) {
         std::string output;
         bool invalido;
-
+        
         do {
             std::cout << mensaje;
             std::getline(std::cin, output);
@@ -361,13 +359,13 @@ public:
     static std::string recortar_cadena(std::string str) {
         std::string output(str);
         std::string::size_type pos = output.find_first_not_of(' ');
-
+        
         if (pos != std::string::npos) {
             output.erase(0, pos);
         }
 
         pos = output.find_last_not_of(' ');
-
+        
         if (pos != std::string::npos) {
             output.erase(pos + 1);
         }
@@ -379,12 +377,12 @@ public:
         std::ifstream file(archivo);
         std::string line;
         std::vector<std::vector<std::string>> resultado;
-
+        
         while (std::getline(file, line)) {
             std::istringstream ss(line);
             std::string token;
             std::vector<std::string> columnas;
-
+            
             while (std::getline(ss, token, ',')) {
                 columnas.push_back(token);
             }
@@ -397,11 +395,11 @@ public:
 
     static void guardar_archivo_datos(std::string archivo, std::vector<std::string> lineas, bool overwrite = true) {
         std::ofstream file(archivo, overwrite ? std::ios::trunc : std::ios::app);
-
+        
         for (std::string linea : lineas) {
             file << linea << std::endl;
         }
-
+        
         std::string linea;
     }
 

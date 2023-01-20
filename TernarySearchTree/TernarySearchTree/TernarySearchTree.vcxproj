@@ -18,6 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArbolTernarioBusqueda.h" />
+    <ClInclude Include="Ayuda.h" />
+    <ClInclude Include="GestorAplicacion.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuOpciones.h" />
+    <ClInclude Include="NodoArbolBinario.h" />
+    <ClInclude Include="NodoBasico.h" />
+    <ClInclude Include="NodoTernario.h" />
+    <ClInclude Include="Validaciones.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GestorAplicacion.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuOpciones.cpp" />
+    <ClCompile Include="NodoBasico.cpp" />
+    <ClCompile Include="NodoTernario.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -127,37 +146,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Fecha.cpp" />
-    <ClCompile Include="Gestor_app.cpp" />
-    <ClCompile Include="Gestor_Confirmacion.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="md5.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Menu_Opciones.cpp" />
-    <ClCompile Include="NodoBasico.cpp" />
-    <ClCompile Include="NodoTernario.cpp" />
-    <ClCompile Include="Usuario.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ArbolBT.h" />
-    <ClInclude Include="Ayudas.h" />
-    <ClInclude Include="CDLlist.h" />
-    <ClInclude Include="Fecha.h" />
-    <ClInclude Include="Gestor_app.h" />
-    <ClInclude Include="Gestor_Confirmacion.h" />
-    <ClInclude Include="Titulo.h" />
-    <ClInclude Include="md5.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Menu_Opciones.h" />
-    <ClInclude Include="Modelo.h" />
-    <ClInclude Include="NodoAB.h" />
-    <ClInclude Include="Usuario.h" />
-    <ClInclude Include="Validaciones.h" />
-    <ClInclude Include="Nodo.h" />
-    <ClInclude Include="NodoBasico.h" />
-    <ClInclude Include="NodoTernario.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

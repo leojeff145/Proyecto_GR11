@@ -4,32 +4,32 @@ NodoBasico::NodoBasico() {
 	_padre = nullptr;
 }
 
-NodoBasico::NodoBasico(std::string dato) {
+NodoBasico::NodoBasico(std::string data) {
 	_padre = nullptr;
-	_dato = dato;
+	_dato = data;
 }
 
 NodoBasico::~NodoBasico() {
-	for (auto it = _hijos.begin(); it != _hijos.end(); ++it) {
+	for (auto it = _hijo.begin(); it != _hijo.end(); ++it) {
 		delete (*it);
 	}
 }
 
-void NodoBasico::nodosHijos(NodoBasico* nd) {
-	_hijos.push_back(nd);
+void NodoBasico::agregarHijo(NodoBasico* nd) {
+	_hijo.push_back(nd);
 	nd->setPadre(this);
 }
 
-std::list<NodoBasico*> NodoBasico::getHijos() {
-	return _hijos;
+std::list<NodoBasico*> NodoBasico::getHijo() {
+	return _hijo;
 }
 
 std::string NodoBasico::getDato() {
 	return _dato;
 }
 
-void NodoBasico::setDato(std::string dato) {
-	_dato = dato;
+void NodoBasico::setDato(std::string data) {
+	_dato = data;
 }
 
 void NodoBasico::setPadre(NodoBasico* nd) {
