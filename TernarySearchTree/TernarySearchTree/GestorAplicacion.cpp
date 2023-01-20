@@ -53,7 +53,7 @@ void GestorAplicacion::menu_opcion_arbol()
 
         if (encontrado != nullptr) {
             arbol->remove(valor);
-            //arbol->print();
+            arbol->print();
         } else {
             std::cout << "el valor '" << valor << "' no fue encontrado" << std::endl << std::endl;
         }
