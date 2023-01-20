@@ -7,6 +7,7 @@
 #include <climits>
 #include <iostream>
 
+
 #define CALL_MEMBER_FN(object, ptrToMember) ((object).*(ptrToMember))
 
 template <class T>
