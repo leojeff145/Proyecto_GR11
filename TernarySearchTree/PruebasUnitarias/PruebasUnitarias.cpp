@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "../utils.h"
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PruebasUnitarias
