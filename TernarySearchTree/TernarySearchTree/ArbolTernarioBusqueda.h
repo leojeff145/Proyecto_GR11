@@ -11,9 +11,9 @@
 
 class ArbolTernarioBusqueda {
 public:
-	void insert(std::string value);
-	void remove(std::string value);
-	NodoTernario* find(std::string value);
+	void insert(std::string valor);
+	void remove(std::string valor);
+	NodoTernario* find(std::string valor);
 	void print();
 	void traverse(std::function<void(char value)> cb);
 	void write(std::ostream& out);
@@ -46,22 +46,22 @@ private:
 		return count;
 	}
 
-	NodoTernario* root_ = nullptr;
+	NodoTernario* raiz_ = nullptr;
 };
 
 inline void ArbolTernarioBusqueda::traverse(std::function<void(char value)> cb) {
-	traverse_recursive(root_, cb);
+	traverse_recursive(raiz_, cb);
 }
 
 inline void ArbolTernarioBusqueda::write(std::ostream& out) {
-	write_recursive(root_, out);
+	write_recursive(raiz_, out);
 }
 
 inline NodoTernario* ArbolTernarioBusqueda::read(std::string filename) {
 	NodoTernario* root;
 	std::ifstream file(filename.c_str());
 	read_recursive(root, file);
-	root_ = root;
+	raiz_ = root;
 	return root;
 }
 
@@ -114,18 +114,18 @@ inline void ArbolTernarioBusqueda::insert(std::string value) {
 		return;
 	}
 
-	if (root_ == nullptr) {
-		root_ = new NodoTernario(' ');
+	if (raiz_ == nullptr) {
+		raiz_ = new NodoTernario(' ');
 	}
 
-	insert_recursive(root_, Ayuda::uppercase(value));
+	insert_recursive(raiz_, Ayuda::uppercase(value));
 }
 
 inline NodoTernario* ArbolTernarioBusqueda::find(std::string value) {
 	value = Ayuda::uppercase(value);
 	std::regex pattern("[^a-z]");
 	std::regex_replace(value, pattern, "");
-	return find_recursive(root_, value);
+	return find_recursive(raiz_, value);
 }
 
 inline NodoTernario* ArbolTernarioBusqueda::find_recursive(NodoTernario*& tree, std::string value) {
@@ -174,14 +174,14 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 		return;
 	} else if (tree->middle() == nullptr && tree->left() == nullptr && tree->right() == nullptr) {
 		if (tree->parent() == nullptr) {
-			root_ = nullptr;
+			raiz_ = nullptr;
 		} else if (tree->parent()->left() == tree) {
 			tree->parent()->left(nullptr);
 		} else if (tree->parent()->right() == tree) {
 			tree->parent()->right(nullptr);
 		} else if (tree->parent()->middle() == tree) {
 			tree->parent()->middle(nullptr);
-			// tree->parent()->value(' ');
+			// tree->parent()->valor(' ');
 		}
 
 		cleanup_delete(tree->parent());
@@ -195,7 +195,7 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 		}
 
 		if (tree->parent() == nullptr) {
-			root_ = child;
+			raiz_ = child;
 		} else if (tree->parent()->left() == tree) {
 			tree->parent()->left(child);
 			child->parent(tree->parent());
@@ -235,7 +235,7 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 		node->parent(tree->parent());
 
 		if (node->parent() == nullptr) {
-			root_ = node;
+			raiz_ = node;
 		} else {
 			if (tree->parent()->left() == tree) {
 				tree->parent()->left(node);
@@ -252,14 +252,14 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 }
 
 inline void ArbolTernarioBusqueda::remove(std::string value) {
-	/*NodoTernario* node = find(value);
+	/*NodoTernario* node = find(valor);
 
 	if (node != nullptr) {
 		node->is_word(false);
 		cleanup_delete(node);
 	}*/
 
-	remove_recursive(root_, value, 0);
+	remove_recursive(raiz_, value, 0);
 }
 
 inline NodoTernario* ArbolTernarioBusqueda::remove_recursive(NodoTernario* node, std::string word, int position) {
@@ -298,7 +298,7 @@ inline NodoTernario* ArbolTernarioBusqueda::remove_recursive(NodoTernario* node,
 inline void ArbolTernarioBusqueda::print() {
 	char buffer[1000];
 	NodoBasico* head = new NodoBasico();
-	print_util(root_, buffer, 0, head);
+	print_util(raiz_, buffer, 0, head);
 
 	ArbolBT<NodoBasico> printer(head->getHijo().front(), &NodoBasico::getHijo, &NodoBasico::getDato);
 	printer.print();
