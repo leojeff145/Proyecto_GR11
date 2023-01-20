@@ -181,7 +181,7 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 			tree->parent()->right(nullptr);
 		} else if (tree->parent()->middle() == tree) {
 			tree->parent()->middle(nullptr);
-			// tree->parent()->valor(' ');
+			//tree->parent()->value(' ');
 		}
 
 		cleanup_delete(tree->parent());
@@ -252,14 +252,14 @@ inline void ArbolTernarioBusqueda::cleanup_delete(NodoTernario* tree) {
 }
 
 inline void ArbolTernarioBusqueda::remove(std::string value) {
-	/*NodoTernario* node = find(valor);
+	NodoTernario* node = find(value);
 
 	if (node != nullptr) {
 		node->is_word(false);
 		cleanup_delete(node);
-	}*/
+	}
 
-	remove_recursive(raiz_, value, 0);
+	//remove_recursive(raiz_, value, 0);
 }
 
 inline NodoTernario* ArbolTernarioBusqueda::remove_recursive(NodoTernario* node, std::string word, int position) {
