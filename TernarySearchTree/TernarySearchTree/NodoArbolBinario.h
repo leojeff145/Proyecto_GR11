@@ -29,7 +29,7 @@ class NodoArbolBinario
 
 	virtual ~NodoArbolBinario();
 
-	void printTree(std::shared_ptr<NodoArbolBinario<T>> thisHead);
+	void imprimirArbol(std::shared_ptr<NodoArbolBinario<T>> thisHead);
 
   private:
 	T * _nd;
@@ -125,9 +125,9 @@ NodoArbolBinario<T>::NodoArbolBinario(T* node) {
 	_wbloque = 0;
 
 	std::list<T*> ls = getHijo();
-	for (auto& child : ls) {
-		std::shared_ptr<NodoArbolBinario> newChild(new NodoArbolBinario(child));
-		_hijo.push_back(std::move(newChild));
+	for (auto& hijo : ls) {
+		std::shared_ptr<NodoArbolBinario> nuevoHijo(new NodoArbolBinario(hijo));
+		_hijo.push_back(std::move(nuevoHijo));
 	}
 }
 
@@ -136,27 +136,27 @@ NodoArbolBinario<T>::~NodoArbolBinario() {
 }
 
 template <class T>
-void NodoArbolBinario<T>::printTree(std::shared_ptr<NodoArbolBinario<T>> thisHead) {
+void NodoArbolBinario<T>::imprimirArbol(std::shared_ptr<NodoArbolBinario<T>> cabeza) {
 
 	calcProfundidad(0);
 	calcAncho();
 
-	std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>> levels;
-	agruparNodosPorProfundidad(levels, thisHead);
+	std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>> niveles;
+	agruparNodosPorProfundidad(niveles, cabeza);
 	cambiarPosicionesNodos(0);
-	imprimirLinea(0, levels);
+	imprimirLinea(0, niveles);
 
-	for (std::size_t i = 1; i < levels.size(); i++) {
-		imprimirPrelinea(i, levels);
-		imprimirLinea(i, levels);
+	for (std::size_t i = 1; i < niveles.size(); i++) {
+		imprimirPrelinea(i, niveles);
+		imprimirLinea(i, niveles);
 	}
 }
 
 template <class T>
-void NodoArbolBinario<T>::calcProfundidad(std::size_t initialDepth) {
-	_profundidad = initialDepth;
-	for (auto& child : _hijo) {
-		child->calcProfundidad(initialDepth + 1);
+void NodoArbolBinario<T>::calcProfundidad(std::size_t profundidadInicial) {
+	_profundidad = profundidadInicial;
+	for (auto& hijo : _hijo) {
+		hijo->calcProfundidad(profundidadInicial + 1);
 	}
 }
 
@@ -178,44 +178,44 @@ std::size_t NodoArbolBinario<T>::calcAncho() {
 }
 
 template <class T>
-void NodoArbolBinario<T>::agruparNodosPorProfundidad(std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels, std::shared_ptr<NodoArbolBinario<T>> thisHead) {
-	std::list<std::shared_ptr<NodoArbolBinario>> queue;
+void NodoArbolBinario<T>::agruparNodosPorProfundidad(std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& niveles, std::shared_ptr<NodoArbolBinario<T>> thisHead) {
+	std::list<std::shared_ptr<NodoArbolBinario>> cola;
 	std::shared_ptr<NodoArbolBinario> nd;
 
-	queue.push_back(thisHead);
+	cola.push_back(thisHead);
 
-	while (!queue.empty()) {
-		nd = queue.front();
-		queue.pop_front();
-		for (auto& child : nd->_hijo) {
-			queue.push_back(child);
+	while (!cola.empty()) {
+		nd = cola.front();
+		cola.pop_front();
+		for (auto& hijo : nd->_hijo) {
+			cola.push_back(hijo);
 		}
-		while (levels.size() <= nd->_profundidad) {
-			std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> layer(new std::list<std::shared_ptr<NodoArbolBinario>>());
-			levels.push_back(std::move(layer));
+		while (niveles.size() <= nd->_profundidad) {
+			std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> capa(new std::list<std::shared_ptr<NodoArbolBinario>>());
+			niveles.push_back(std::move(capa));
 		}
-		levels[nd->_profundidad]->push_back(nd);
+		niveles[nd->_profundidad]->push_back(nd);
 	}
 }
 
 template <class T>
-std::size_t NodoArbolBinario<T>::cambiarPosicionesNodos(std::size_t blockStart) {
-	_fbp = blockStart;
-	_lbp = blockStart + _wbloque - 1;
+std::size_t NodoArbolBinario<T>::cambiarPosicionesNodos(std::size_t bloqueInicio) {
+	_fbp = bloqueInicio;
+	_lbp = bloqueInicio + _wbloque - 1;
 
 	if (_wser >= _whijo) {
-		_fcp = blockStart + (_wbloque - _wser) / 2;
+		_fcp = bloqueInicio + (_wbloque - _wser) / 2;
 		_lcp = _fcp + _wser - 1;
 		_mcp = (_fcp + _lcp) / 2; // left aligning;
 
-		std::size_t childrenBlockStart = blockStart + (_wbloque - _whijo) / 2;
+		std::size_t inicioBloqueHijos = bloqueInicio + (_wbloque - _whijo) / 2;
 		for (std::shared_ptr<NodoArbolBinario>& nd : _hijo) {
-			childrenBlockStart = nd->cambiarPosicionesNodos(childrenBlockStart);
+			inicioBloqueHijos = nd->cambiarPosicionesNodos(inicioBloqueHijos);
 		}
 	} else {
-		std::size_t childrenBlockStart = blockStart + (_wbloque - _whijo) / 2;
+		std::size_t inicioBloqueHijos = bloqueInicio + (_wbloque - _whijo) / 2;
 		for (std::shared_ptr<NodoArbolBinario>& nd : _hijo) {
-			childrenBlockStart = nd->cambiarPosicionesNodos(childrenBlockStart);
+			inicioBloqueHijos = nd->cambiarPosicionesNodos(inicioBloqueHijos);
 		}
 
 		_mcp = (_hijo.front()->_mcp + _hijo.back()->_mcp) / 2;
@@ -223,15 +223,15 @@ std::size_t NodoArbolBinario<T>::cambiarPosicionesNodos(std::size_t blockStart) 
 		_lcp = _fcp + _wser - 1;
 	}
 
-	return blockStart + _wbloque + 1;
+	return bloqueInicio + _wbloque + 1;
 }
 
 template <class T>
-void NodoArbolBinario<T>::imprimirLinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels) {
+void NodoArbolBinario<T>::imprimirLinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& niveles) {
 	for (std::size_t c = 0; c < _wbloque; c++) {
-		if (CisPadrePrimerCaracter(c, levels[ln])) {
-			c += imprimirNodoInicialAt(c, levels[ln]) - 1;
-		} else if (CisEntreHijoYPadre(c, levels[ln])) {
+		if (CisPadrePrimerCaracter(c, niveles[ln])) {
+			c += imprimirNodoInicialAt(c, niveles[ln]) - 1;
+		} else if (CisEntreHijoYPadre(c, niveles[ln])) {
 			imprimirGuionBajo();
 		} else {
 			imprimirEspacio();
@@ -241,10 +241,10 @@ void NodoArbolBinario<T>::imprimirLinea(std::size_t ln, std::vector<std::unique_
 }
 
 template <class T>
-void NodoArbolBinario<T>::imprimirPrelinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels) {
+void NodoArbolBinario<T>::imprimirPrelinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& niveles) {
 	for (std::size_t c = 0; c < _wbloque; c++) {
-		if (CisCentroHijo(c, levels[ln])) {
-			switch (padrePosicionHijosReales(c, levels[ln - 1], levels[ln])) {
+		if (CisCentroHijo(c, niveles[ln])) {
+			switch (padrePosicionHijosReales(c, niveles[ln - 1], niveles[ln])) {
 			case -1:
 				imprimirHijosIzquierdos();
 				break;
@@ -263,8 +263,8 @@ void NodoArbolBinario<T>::imprimirPrelinea(std::size_t ln, std::vector<std::uniq
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisPadrePrimerCaracter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
-	for (std::shared_ptr<NodoArbolBinario>& nd : *level) {
+bool NodoArbolBinario<T>::CisPadrePrimerCaracter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& nivel) {
+	for (std::shared_ptr<NodoArbolBinario>& nd : *nivel) {
 		if (nd->_fcp == c)
 			return true;
 	}
@@ -272,8 +272,8 @@ bool NodoArbolBinario<T>::CisPadrePrimerCaracter(std::size_t c, std::unique_ptr<
 }
 
 template <class T>
-std::size_t NodoArbolBinario<T>::imprimirNodoInicialAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
-	for (std::shared_ptr<NodoArbolBinario>& nd : *level) {
+std::size_t NodoArbolBinario<T>::imprimirNodoInicialAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& nivel) {
+	for (std::shared_ptr<NodoArbolBinario>& nd : *nivel) {
 		if (nd->_fcp == c) {
 			return nd->imprimirNodoDato();
 		}
@@ -282,8 +282,8 @@ std::size_t NodoArbolBinario<T>::imprimirNodoInicialAt(std::size_t c, std::uniqu
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisEntreHijoYPadre(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent) {
-	for (std::shared_ptr<NodoArbolBinario>& nd : *parent) {
+bool NodoArbolBinario<T>::CisEntreHijoYPadre(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& padre) {
+	for (std::shared_ptr<NodoArbolBinario>& nd : *padre) {
 		if (nd->_hijo.empty()) {
 			continue;
 		}
@@ -296,8 +296,8 @@ bool NodoArbolBinario<T>::CisEntreHijoYPadre(std::size_t c, std::unique_ptr<std:
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisCentroHijo(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
-	for (std::shared_ptr<NodoArbolBinario>& nd : *children) {
+bool NodoArbolBinario<T>::CisCentroHijo(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& hijos) {
+	for (std::shared_ptr<NodoArbolBinario>& nd : *hijos) {
 		if (nd->_mcp == c)
 			return true;
 	}
@@ -305,15 +305,15 @@ bool NodoArbolBinario<T>::CisCentroHijo(std::size_t c, std::unique_ptr<std::list
 }
 
 template <class T>
-int NodoArbolBinario<T>::padrePosicionHijosReales(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
+int NodoArbolBinario<T>::padrePosicionHijosReales(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& padre, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& hijos) {
 	std::shared_ptr<NodoArbolBinario> dad = nullptr;
 	std::shared_ptr<NodoArbolBinario> kid = nullptr;
-	for (std::shared_ptr<NodoArbolBinario>& nd : *parent) {
+	for (std::shared_ptr<NodoArbolBinario>& nd : *padre) {
 		if ((c >= nd->_fbp) && (c <= nd->_lbp)) {
 			dad = nd;
 		}
 	}
-	for (auto& nd : *children) {
+	for (auto& nd : *hijos) {
 		if ((c >= nd->_fbp) && (c <= nd->_lbp)) {
 			kid = nd;
 		}
@@ -359,12 +359,12 @@ void NodoArbolBinario<T>::imprimirHijosVerticales() {
 }
 
 template <class T>
-ArbolBT<T>::ArbolBT(T* head, hijoGetterFcn f1, datoGetterFcn f2) {
+ArbolBT<T>::ArbolBT(T* cabeza, hijoGetterFcn f1, datoGetterFcn f2) {
 	NodoArbolBinario<T>::inicializarClase(f1, f2);
-	_cabeza = std::shared_ptr<NodoArbolBinario<T>>(new NodoArbolBinario<T>(head));
+	_cabeza = std::shared_ptr<NodoArbolBinario<T>>(new NodoArbolBinario<T>(cabeza));
 }
 
 template <class T>
 void ArbolBT<T>::print() {
-	_cabeza->printTree(_cabeza);
+	_cabeza->imprimirArbol(_cabeza);
 }
