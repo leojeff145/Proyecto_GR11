@@ -257,6 +257,7 @@ inline void ArbolTernarioBusqueda::remove(std::string value) {
 	if (node != nullptr) {
 		node->is_word(false);
 		cleanup_delete(node);
+		print();
 	}
 
 	//remove_recursive(raiz_, value, 0);
