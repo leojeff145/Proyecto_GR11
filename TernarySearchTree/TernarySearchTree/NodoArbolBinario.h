@@ -82,7 +82,7 @@ class ArbolBT
 	void print();
 
   private:
-	std::shared_ptr<NodoArbolBinario<T>> _head;
+	std::shared_ptr<NodoArbolBinario<T>> _cabeza;
 };
 
 template <class T>
@@ -361,10 +361,10 @@ void NodoArbolBinario<T>::imprimirHijosVerticales() {
 template <class T>
 ArbolBT<T>::ArbolBT(T* head, hijoGetterFcn f1, datoGetterFcn f2) {
 	NodoArbolBinario<T>::inicializarClase(f1, f2);
-	_head = std::shared_ptr<NodoArbolBinario<T>>(new NodoArbolBinario<T>(head));
+	_cabeza = std::shared_ptr<NodoArbolBinario<T>>(new NodoArbolBinario<T>(head));
 }
 
 template <class T>
 void ArbolBT<T>::print() {
-	_head->printTree(_head);
+	_cabeza->printTree(_cabeza);
 }
