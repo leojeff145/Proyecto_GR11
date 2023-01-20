@@ -300,7 +300,7 @@ inline void ArbolTernarioBusqueda::print() {
 	NodoBasico* head = new NodoBasico();
 	print_util(root_, buffer, 0, head);
 
-	BTTree<NodoBasico> printer(head->getHijo().front(), &NodoBasico::getHijo, &NodoBasico::getDato);
+	ArbolBT<NodoBasico> printer(head->getHijo().front(), &NodoBasico::getHijo, &NodoBasico::getDato);
 	printer.print();
 }
 

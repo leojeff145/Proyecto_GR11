@@ -37,7 +37,7 @@ class NodoArbolBinario
 	std::size_t _profundidad;
 
 	std::size_t _wser;
-	std::size_t _wchijo;
+	std::size_t _whijo;
 	std::size_t _wbloque;
 
 	std::size_t _fcp;
@@ -53,32 +53,32 @@ class NodoArbolBinario
 	std::size_t cambiarPosicionesNodos(std::size_t blockStart);
 	
 	void imprimirLinea(std::size_t ln,    std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>> & niveles);
-	void printPreline(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>> & niveles);
+	void imprimirPrelinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>> & niveles);
 	
-	std::size_t printNodeStartingAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & niveles);
-	std::size_t printNodeData();
+	std::size_t imprimirNodoInicialAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & niveles);
+	std::size_t imprimirNodoDato();
 	
-	bool CisParentFirstCharacter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & nivel);
-	bool CisBetweenChildrenAndParent(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & padre);
-	bool CisCenterChildren(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & hijo);
-	int parentPositionRelToChildren(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & padre, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & hijo);
+	bool CisPadrePrimerCaracter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & nivel);
+	bool CisEntreHijoYPadre(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & padre);
+	bool CisCentroHijo(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & hijo);
+	int padrePosicionHijosReales(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & padre, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>> & hijo);
 	
 	
-	void printSpace();
-	void printUnderscore();
-	void printLeftChildren();
-	void printRightChildren();
-	void printVerticalChildren();
+	void imprimirEspacio();
+	void imprimirGuionBajo();
+	void imprimirHijosIzquierdos();
+	void imprimirHijosDerechos();
+	void imprimirHijosVerticales();
 
 };
 
 template <class T>
-class BTTree
+class ArbolBT
 {
   public:
 	typedef std::list<T*> (T::*hijoGetterFcn)( void);
 	typedef std::string   (T::*datoGetterFcn)    ( void);
-	BTTree(T* head, hijoGetterFcn f1, datoGetterFcn f2);
+	ArbolBT(T* head, hijoGetterFcn f1, datoGetterFcn f2);
 	void print();
 
   private:
@@ -121,7 +121,7 @@ NodoArbolBinario<T>::NodoArbolBinario(T* node) {
 	_lbp = 0;
 
 	_wser = getDato().length();
-	_wchijo = 0;
+	_whijo = 0;
 	_wbloque = 0;
 
 	std::list<T*> ls = getHijo();
@@ -147,7 +147,7 @@ void NodoArbolBinario<T>::printTree(std::shared_ptr<NodoArbolBinario<T>> thisHea
 	imprimirLinea(0, levels);
 
 	for (std::size_t i = 1; i < levels.size(); i++) {
-		printPreline(i, levels);
+		imprimirPrelinea(i, levels);
 		imprimirLinea(i, levels);
 	}
 }
@@ -163,17 +163,17 @@ void NodoArbolBinario<T>::calcProfundidad(std::size_t initialDepth) {
 template <class T>
 std::size_t NodoArbolBinario<T>::calcAncho() {
 	if (_hijo.empty()) {
-		_wchijo = 0;
+		_whijo = 0;
 	} else {
-		_wchijo += _hijo.front()->calcAncho();
+		_whijo += _hijo.front()->calcAncho();
 
 		auto it = ++_hijo.begin();
 		for (; it != _hijo.end(); ++it) {
-			_wchijo += 1;
-			_wchijo += (*it)->calcAncho();
+			_whijo += 1;
+			_whijo += (*it)->calcAncho();
 		}
 	}
-	_wbloque = std::max(_wser, _wchijo);
+	_wbloque = std::max(_wser, _whijo);
 	return _wbloque;
 }
 
@@ -203,17 +203,17 @@ std::size_t NodoArbolBinario<T>::cambiarPosicionesNodos(std::size_t blockStart) 
 	_fbp = blockStart;
 	_lbp = blockStart + _wbloque - 1;
 
-	if (_wser >= _wchijo) {
+	if (_wser >= _whijo) {
 		_fcp = blockStart + (_wbloque - _wser) / 2;
 		_lcp = _fcp + _wser - 1;
 		_mcp = (_fcp + _lcp) / 2; // left aligning;
 
-		std::size_t childrenBlockStart = blockStart + (_wbloque - _wchijo) / 2;
+		std::size_t childrenBlockStart = blockStart + (_wbloque - _whijo) / 2;
 		for (std::shared_ptr<NodoArbolBinario>& nd : _hijo) {
 			childrenBlockStart = nd->cambiarPosicionesNodos(childrenBlockStart);
 		}
 	} else {
-		std::size_t childrenBlockStart = blockStart + (_wbloque - _wchijo) / 2;
+		std::size_t childrenBlockStart = blockStart + (_wbloque - _whijo) / 2;
 		for (std::shared_ptr<NodoArbolBinario>& nd : _hijo) {
 			childrenBlockStart = nd->cambiarPosicionesNodos(childrenBlockStart);
 		}
@@ -229,41 +229,41 @@ std::size_t NodoArbolBinario<T>::cambiarPosicionesNodos(std::size_t blockStart) 
 template <class T>
 void NodoArbolBinario<T>::imprimirLinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels) {
 	for (std::size_t c = 0; c < _wbloque; c++) {
-		if (CisParentFirstCharacter(c, levels[ln])) {
-			c += printNodeStartingAt(c, levels[ln]) - 1;
-		} else if (CisBetweenChildrenAndParent(c, levels[ln])) {
-			printUnderscore();
+		if (CisPadrePrimerCaracter(c, levels[ln])) {
+			c += imprimirNodoInicialAt(c, levels[ln]) - 1;
+		} else if (CisEntreHijoYPadre(c, levels[ln])) {
+			imprimirGuionBajo();
 		} else {
-			printSpace();
+			imprimirEspacio();
 		}
 	}
 	std::cout << std::endl;
 }
 
 template <class T>
-void NodoArbolBinario<T>::printPreline(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels) {
+void NodoArbolBinario<T>::imprimirPrelinea(std::size_t ln, std::vector<std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>>& levels) {
 	for (std::size_t c = 0; c < _wbloque; c++) {
-		if (CisCenterChildren(c, levels[ln])) {
-			switch (parentPositionRelToChildren(c, levels[ln - 1], levels[ln])) {
+		if (CisCentroHijo(c, levels[ln])) {
+			switch (padrePosicionHijosReales(c, levels[ln - 1], levels[ln])) {
 			case -1:
-				printLeftChildren();
+				imprimirHijosIzquierdos();
 				break;
 			case 0:
-				printVerticalChildren();
+				imprimirHijosVerticales();
 				break;
 			case 1:
-				printRightChildren();
+				imprimirHijosDerechos();
 				break;
 			}
 		} else {
-			printSpace();
+			imprimirEspacio();
 		}
 	}
 	std::cout << std::endl;
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisParentFirstCharacter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
+bool NodoArbolBinario<T>::CisPadrePrimerCaracter(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
 	for (std::shared_ptr<NodoArbolBinario>& nd : *level) {
 		if (nd->_fcp == c)
 			return true;
@@ -272,17 +272,17 @@ bool NodoArbolBinario<T>::CisParentFirstCharacter(std::size_t c, std::unique_ptr
 }
 
 template <class T>
-std::size_t NodoArbolBinario<T>::printNodeStartingAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
+std::size_t NodoArbolBinario<T>::imprimirNodoInicialAt(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& level) {
 	for (std::shared_ptr<NodoArbolBinario>& nd : *level) {
 		if (nd->_fcp == c) {
-			return nd->printNodeData();
+			return nd->imprimirNodoDato();
 		}
 	}
 	return 0;
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisBetweenChildrenAndParent(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent) {
+bool NodoArbolBinario<T>::CisEntreHijoYPadre(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent) {
 	for (std::shared_ptr<NodoArbolBinario>& nd : *parent) {
 		if (nd->_hijo.empty()) {
 			continue;
@@ -296,7 +296,7 @@ bool NodoArbolBinario<T>::CisBetweenChildrenAndParent(std::size_t c, std::unique
 }
 
 template <class T>
-bool NodoArbolBinario<T>::CisCenterChildren(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
+bool NodoArbolBinario<T>::CisCentroHijo(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
 	for (std::shared_ptr<NodoArbolBinario>& nd : *children) {
 		if (nd->_mcp == c)
 			return true;
@@ -305,7 +305,7 @@ bool NodoArbolBinario<T>::CisCenterChildren(std::size_t c, std::unique_ptr<std::
 }
 
 template <class T>
-int NodoArbolBinario<T>::parentPositionRelToChildren(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
+int NodoArbolBinario<T>::padrePosicionHijosReales(std::size_t c, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& parent, std::unique_ptr<std::list<std::shared_ptr<NodoArbolBinario>>>& children) {
 	std::shared_ptr<NodoArbolBinario> dad = nullptr;
 	std::shared_ptr<NodoArbolBinario> kid = nullptr;
 	for (std::shared_ptr<NodoArbolBinario>& nd : *parent) {
@@ -328,43 +328,43 @@ int NodoArbolBinario<T>::parentPositionRelToChildren(std::size_t c, std::unique_
 }
 
 template <class T>
-std::size_t NodoArbolBinario<T>::printNodeData() {
+std::size_t NodoArbolBinario<T>::imprimirNodoDato() {
 	std::cout << getDato();
 	return _wser;
 }
 
 template <class T>
-void NodoArbolBinario<T>::printSpace() {
+void NodoArbolBinario<T>::imprimirEspacio() {
 	std::cout << " ";
 }
 
 template <class T>
-void NodoArbolBinario<T>::printUnderscore() {
+void NodoArbolBinario<T>::imprimirGuionBajo() {
 	std::cout << "_";
 }
 
 template <class T>
-void NodoArbolBinario<T>::printLeftChildren() {
+void NodoArbolBinario<T>::imprimirHijosIzquierdos() {
 	std::cout << "/";
 }
 
 template <class T>
-void NodoArbolBinario<T>::printRightChildren() {
+void NodoArbolBinario<T>::imprimirHijosDerechos() {
 	std::cout << "\\";
 }
 
 template <class T>
-void NodoArbolBinario<T>::printVerticalChildren() {
+void NodoArbolBinario<T>::imprimirHijosVerticales() {
 	std::cout << "|";
 }
 
 template <class T>
-BTTree<T>::BTTree(T* head, hijoGetterFcn f1, datoGetterFcn f2) {
+ArbolBT<T>::ArbolBT(T* head, hijoGetterFcn f1, datoGetterFcn f2) {
 	NodoArbolBinario<T>::inicializarClase(f1, f2);
 	_head = std::shared_ptr<NodoArbolBinario<T>>(new NodoArbolBinario<T>(head));
 }
 
 template <class T>
-void BTTree<T>::print() {
+void ArbolBT<T>::print() {
 	_head->printTree(_head);
 }
