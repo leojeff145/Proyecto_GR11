@@ -110,8 +110,8 @@ std::string NodoArbolBinario<T>::getDato() {
 
 
 template <class T>
-NodoArbolBinario<T>::NodoArbolBinario(T* node) {
-	_nd = node;
+NodoArbolBinario<T>::NodoArbolBinario(T* nodo) {
+	_nd = nodo;
 	_profundidad = 0;
 
 	_fcp = 0;

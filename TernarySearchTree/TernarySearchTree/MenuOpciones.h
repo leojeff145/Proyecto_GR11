@@ -52,40 +52,40 @@ public:
     /**
      * @brief agrega un argumento con clave
      * @tparam T tipo del argumento
-     * @param key 
-     * @param argument 
+     * @param llave 
+     * @param argumento 
     */
     template <typename T>
-    void add(std::string key, MenuOptionArgument<T> *argument);
+    void add(std::string llave, MenuOptionArgument<T> *argumento);
 
     /**
      * @brief Agrega un argumento con clave y un valor
      * @tparam T tipo de dato del argumento
-     * @param key clave del argumento
-     * @param value 
+     * @param llave clave del argumento
+     * @param valor 
     */
     template <typename T>
-    void add(std::string key, T value);
+    void add(std::string llave, T valor);
 
     /**
      * @brief obtiene un argumento por clave
      * @tparam T tipo de dato del argumento
-     * @param key clave del argumento a obtener
+     * @param llave clave del argumento a obtener
      * @return 
     */
     template <typename T>
-    T get(std::string key);
+    T get(std::string llave);
 
     /**
      * @brief define un argumento por clave y valor
      * @tparam T tipo de dato del argumento
-     * @param key clave del argumento
-     * @param value valor del argumento
+     * @param llave clave del argumento
+     * @param valor valor del argumento
     */
     template <typename T>
-    void set(std::string key, T value);
+    void set(std::string llave, T valor);
 
-    bool has(std::string key);
+    bool has(std::string llave);
 private:
     std::map<std::string, std::unique_ptr<MenuOptionArgumentBase>> *arguments;
 };
