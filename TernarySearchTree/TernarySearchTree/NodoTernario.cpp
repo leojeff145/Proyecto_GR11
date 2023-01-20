@@ -1,53 +1,53 @@
 #include "NodoTernario.h"
 
-NodoTernario::NodoTernario(char value) {
-	value_ = value;
+NodoTernario::NodoTernario(char valor) {
+	valor_ = valor;
 }
 
 char NodoTernario::value() {
-	return value_;
+	return valor_;
 }
 
 NodoTernario*& NodoTernario::left() {
-	return left_;
+	return izquierda_;
 }
 
 NodoTernario*& NodoTernario::middle() {
-	return middle_;
+	return medio_;
 }
 
 NodoTernario*& NodoTernario::right() {
-	return right_;
+	return derecha_;
 }
 
 NodoTernario*& NodoTernario::parent() {
-	return parent_;
+	return padre_;
 }
 
 bool NodoTernario::is_word() {
-	return is_word_;
+	return es_palabra_;
 }
 
-void NodoTernario::value(char value) {
-	value_ = value;
+void NodoTernario::value(char valor) {
+	valor_ = valor;
 }
 
-void NodoTernario::left(NodoTernario* left) {
-	left_ = left;
+void NodoTernario::left(NodoTernario* izquierda) {
+	izquierda_ = izquierda;
 }
 
-void NodoTernario::middle(NodoTernario* middle) {
-	middle_ = middle;
+void NodoTernario::middle(NodoTernario* medio) {
+	medio_ = medio;
 }
 
-void NodoTernario::right(NodoTernario* right) {
-	right_ = right;
+void NodoTernario::right(NodoTernario* derecha) {
+	derecha_ = derecha;
 }
 
-void NodoTernario::parent(NodoTernario* parent) {
-	parent_ = parent;
+void NodoTernario::parent(NodoTernario* padre) {
+	padre_ = padre;
 }
 
-void NodoTernario::is_word(bool value) {
-	is_word_ = value;
+void NodoTernario::is_word(bool valor) {
+	es_palabra_ = valor;
 }

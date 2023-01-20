@@ -36,10 +36,10 @@
     <ClInclude Include="NodoBasico.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="NodoTernario.h">
+    <ClInclude Include="Validaciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Validaciones.h">
+    <ClInclude Include="NodoTernario.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
