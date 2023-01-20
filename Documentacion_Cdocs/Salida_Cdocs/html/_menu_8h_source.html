@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Arbol de Busqueda Ternario: Fichero Fuente C:/Users/adria/Documents/Estructura de Datos 7999/Proyecto 2/Proyecto_GR11/TernarySearchTree/TernarySearchTree/Menu.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="espe.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Arbol de Busqueda Ternario<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Arbol de Busqueda</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_10267799bfbf762f65ce2aa21165f869.html">TernarySearchTree</a></li><li class="navelem"><a class="el" href="dir_dfbda866d3d4478d58dd32acbf1e045b.html">TernarySearchTree</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Menu.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_menu_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_menu_opciones_8h.html">MenuOpciones.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="_menu_8h.html#afa086fc916a81e7fd348ec00cf786916">    7</a></span><span class="preprocessor">#define KEY_UP 72</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="_menu_8h.html#a203163bc0189184a1de6ca8d1e53c6bf">    8</a></span><span class="preprocessor">#define KEY_DOWN 80</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="_menu_8h.html#af4d1b8a2912354646c74cf36c69f8223">    9</a></span><span class="preprocessor">#define KEY_LEFT 77</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="_menu_8h.html#a004194639b9ad76cea01d9e93716d4d6">   10</a></span><span class="preprocessor">#define KEY_RIGHT 75</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="_menu_8h.html#abaee5edb96e542206ae6c8102ac228af">   11</a></span><span class="preprocessor">#define KEY_ENTER 13</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="_menu_8h.html#a6c8ee53908fc5d6df19f1da8502b38dc">   12</a></span><span class="preprocessor">#define KEY_ESCAPE 27</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_console.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="class_console.html">Console</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_console.html#acada50c76b938bf0ddb9493cbb9cac82">   18</a></span>    <a class="code hl_function" href="class_console.html#acada50c76b938bf0ddb9493cbb9cac82">Console</a>(<a class="code hl_class" href="class_console.html">Console</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_console.html#a83ffeefc0f59a5dff8fe0e280bae919a">   19</a></span>    <a class="code hl_class" href="class_console.html">Console</a>&amp; <a class="code hl_function" href="class_console.html#a83ffeefc0f59a5dff8fe0e280bae919a">operator=</a>(<a class="code hl_class" href="class_console.html">Console</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_console.html">Console</a>&amp; <a class="code hl_function" href="class_console.html#a7c7c26a748efc3db1e7deb972269e5d9">get</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_console.html#ace58facb8e260b67fcf80a7d2096422c">print</a>(std::string text, COORD coord);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_console.html#a8bee75f494c4a269ee47fc870e3124bf">clear_line</a>(<span class="keywordtype">short</span> y);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_console.html#a162b4cd22075915de7a75e8e1db7a7fb">clear_screen</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_console.html#a4e21136431202f0772ad3624f9756cb0">clear_area</a>(SMALL_RECT area);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_console.html#abed67e80bb704ce4194a5a8c91eae940">set_cursor_position</a>(COORD coord);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    COORD <a class="code hl_function" href="class_console.html#a88d81fda370348ea482596d866132eff">get_console_size</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="class_console.html">Console</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_menu.html">   33</a></span><span class="keyword">class </span><a class="code hl_class" href="class_menu.html">Menu</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="class_menu.html#ad466dd83355124a6ed958430450bfe94">Menu</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_function" href="class_menu.html#ad466dd83355124a6ed958430450bfe94">Menu</a>(std::string title);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu.html#af00883540de9adcb6ad516e897c19cd2">add_option</a>(<a class="code hl_class" href="class_menu_option.html">MenuOption</a> option);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu.html#a94a49db0eb130cb6a6c9d862fb59e281">remove_option</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu.html#a2e784e39d600214e778acbfcbfe04a1b">display</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_menu.html#a14199ea81c4618e3cb599d58e0633db0">stop</a>();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_menu.html#a49b5360dca4d3f8de2e4728657b3dba3">is_running</a>();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_menu.html#a16aed1230d6e2b4d8c2856ec2ce50228">   66</a></span>    <a class="code hl_class" href="class_menu_option.html">MenuOption</a> <a class="code hl_function" href="class_menu.html#a16aed1230d6e2b4d8c2856ec2ce50228">opcion_salir</a>(std::string label = <span class="stringliteral">&quot;Salir&quot;</span>, <span class="keywordtype">bool</span> pausar = <span class="keyword">false</span>) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="class_menu_option.html">MenuOption</a>(label, [&amp;]() {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <a class="code hl_function" href="class_menu.html#a14199ea81c4618e3cb599d58e0633db0">stop</a>();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }, pausar);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    std::string title;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    std::vector&lt;MenuOption&gt; options;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    HANDLE conhandler;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">bool</span> running = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
+<div class="ttc" id="a_menu_opciones_8h_html"><div class="ttname"><a href="_menu_opciones_8h.html">MenuOpciones.h</a></div></div>
+<div class="ttc" id="aclass_console_html"><div class="ttname"><a href="class_console.html">Console</a></div><div class="ttdef"><b>Definition:</b> Menu.h:16</div></div>
+<div class="ttc" id="aclass_console_html_a162b4cd22075915de7a75e8e1db7a7fb"><div class="ttname"><a href="class_console.html#a162b4cd22075915de7a75e8e1db7a7fb">Console::clear_screen</a></div><div class="ttdeci">void clear_screen()</div><div class="ttdef"><b>Definition:</b> Menu.cpp:182</div></div>
+<div class="ttc" id="aclass_console_html_a4e21136431202f0772ad3624f9756cb0"><div class="ttname"><a href="class_console.html#a4e21136431202f0772ad3624f9756cb0">Console::clear_area</a></div><div class="ttdeci">void clear_area(SMALL_RECT area)</div><div class="ttdef"><b>Definition:</b> Menu.cpp:192</div></div>
+<div class="ttc" id="aclass_console_html_a7c7c26a748efc3db1e7deb972269e5d9"><div class="ttname"><a href="class_console.html#a7c7c26a748efc3db1e7deb972269e5d9">Console::get</a></div><div class="ttdeci">static Console &amp; get()</div><div class="ttdef"><b>Definition:</b> Menu.cpp:139</div></div>
+<div class="ttc" id="aclass_console_html_a83ffeefc0f59a5dff8fe0e280bae919a"><div class="ttname"><a href="class_console.html#a83ffeefc0f59a5dff8fe0e280bae919a">Console::operator=</a></div><div class="ttdeci">Console &amp; operator=(Console const &amp;)=delete</div></div>
+<div class="ttc" id="aclass_console_html_a88d81fda370348ea482596d866132eff"><div class="ttname"><a href="class_console.html#a88d81fda370348ea482596d866132eff">Console::get_console_size</a></div><div class="ttdeci">COORD get_console_size()</div><div class="ttdef"><b>Definition:</b> Menu.cpp:225</div></div>
+<div class="ttc" id="aclass_console_html_a8bee75f494c4a269ee47fc870e3124bf"><div class="ttname"><a href="class_console.html#a8bee75f494c4a269ee47fc870e3124bf">Console::clear_line</a></div><div class="ttdeci">void clear_line(short y)</div><div class="ttdef"><b>Definition:</b> Menu.cpp:173</div></div>
+<div class="ttc" id="aclass_console_html_abed67e80bb704ce4194a5a8c91eae940"><div class="ttname"><a href="class_console.html#abed67e80bb704ce4194a5a8c91eae940">Console::set_cursor_position</a></div><div class="ttdeci">void set_cursor_position(COORD coord)</div><div class="ttdef"><b>Definition:</b> Menu.cpp:187</div></div>
+<div class="ttc" id="aclass_console_html_acada50c76b938bf0ddb9493cbb9cac82"><div class="ttname"><a href="class_console.html#acada50c76b938bf0ddb9493cbb9cac82">Console::Console</a></div><div class="ttdeci">Console(Console const &amp;)=delete</div></div>
+<div class="ttc" id="aclass_console_html_ace58facb8e260b67fcf80a7d2096422c"><div class="ttname"><a href="class_console.html#ace58facb8e260b67fcf80a7d2096422c">Console::print</a></div><div class="ttdeci">void print(std::string text, COORD coord)</div><div class="ttdef"><b>Definition:</b> Menu.cpp:144</div></div>
+<div class="ttc" id="aclass_menu_html"><div class="ttname"><a href="class_menu.html">Menu</a></div><div class="ttdef"><b>Definition:</b> Menu.h:33</div></div>
+<div class="ttc" id="aclass_menu_html_a14199ea81c4618e3cb599d58e0633db0"><div class="ttname"><a href="class_menu.html#a14199ea81c4618e3cb599d58e0633db0">Menu::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">detiene el menu</div><div class="ttdef"><b>Definition:</b> Menu.cpp:129</div></div>
+<div class="ttc" id="aclass_menu_html_a16aed1230d6e2b4d8c2856ec2ce50228"><div class="ttname"><a href="class_menu.html#a16aed1230d6e2b4d8c2856ec2ce50228">Menu::opcion_salir</a></div><div class="ttdeci">MenuOption opcion_salir(std::string label=&quot;Salir&quot;, bool pausar=false)</div><div class="ttdef"><b>Definition:</b> Menu.h:66</div></div>
+<div class="ttc" id="aclass_menu_html_a2e784e39d600214e778acbfcbfe04a1b"><div class="ttname"><a href="class_menu.html#a2e784e39d600214e778acbfcbfe04a1b">Menu::display</a></div><div class="ttdeci">void display()</div><div class="ttdoc">muestra el menu</div><div class="ttdef"><b>Definition:</b> Menu.cpp:27</div></div>
+<div class="ttc" id="aclass_menu_html_a49b5360dca4d3f8de2e4728657b3dba3"><div class="ttname"><a href="class_menu.html#a49b5360dca4d3f8de2e4728657b3dba3">Menu::is_running</a></div><div class="ttdeci">bool is_running()</div><div class="ttdoc">verifica si el menu esta detenido.</div><div class="ttdef"><b>Definition:</b> Menu.cpp:133</div></div>
+<div class="ttc" id="aclass_menu_html_a94a49db0eb130cb6a6c9d862fb59e281"><div class="ttname"><a href="class_menu.html#a94a49db0eb130cb6a6c9d862fb59e281">Menu::remove_option</a></div><div class="ttdeci">void remove_option(int index)</div><div class="ttdoc">remueve una opcion del menu</div><div class="ttdef"><b>Definition:</b> Menu.cpp:17</div></div>
+<div class="ttc" id="aclass_menu_html_ad466dd83355124a6ed958430450bfe94"><div class="ttname"><a href="class_menu.html#ad466dd83355124a6ed958430450bfe94">Menu::Menu</a></div><div class="ttdeci">Menu()</div><div class="ttdef"><b>Definition:</b> Menu.cpp:4</div></div>
+<div class="ttc" id="aclass_menu_html_af00883540de9adcb6ad516e897c19cd2"><div class="ttname"><a href="class_menu.html#af00883540de9adcb6ad516e897c19cd2">Menu::add_option</a></div><div class="ttdeci">void add_option(MenuOption option)</div><div class="ttdoc">agrega una opcion al menu</div><div class="ttdef"><b>Definition:</b> Menu.cpp:13</div></div>
+<div class="ttc" id="aclass_menu_option_html"><div class="ttname"><a href="class_menu_option.html">MenuOption</a></div><div class="ttdef"><b>Definition:</b> MenuOpciones.h:130</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
